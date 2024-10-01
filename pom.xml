@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hb0730</groupId>
+    <artifactId>zoom-support</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <modules>
+        <!-- 定义依赖 -->
+        <module>zoom-pom</module>
+        <!-- 基础模块 -->
+        <module>zoom-base</module>
+        <!-- redis缓存模块 -->
+        <module>zoom-cache</module>
+        <!-- 邮件模块 -->
+        <module>zoom-mail</module>
+        <!--springdoc模块-->
+        <module>zoom-springdoc</module>
+        <!--oss模块-->
+        <module>zoom-oss</module>
+        <!--security模块-->
+        <module>zoom-security</module>
+        <!--mybatis模块-->
+        <module>zoom-mybatis</module>
+        <!--web模块-->
+        <module>zoom-web</module>
+    </modules>
+
+
+</project>
