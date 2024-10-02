@@ -1,6 +1,7 @@
 package com.hb0730.zoom.base.security;
 
 import com.hb0730.zoom.base.ZoomConst;
+import com.hb0730.zoom.base.util.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -25,7 +26,9 @@ public class SecurityUtils {
      * @return token
      */
     public static Optional<String> obtainAuthorization(HttpServletRequest request) {
-        return Optional.ofNullable(request.getHeader(ZoomConst.X_ACCESS_TOKEN)).map(String::trim);
+        String token = request.getHeader(ZoomConst.X_ACCESS_TOKEN);
+        token = StrUtil.blankToDefault(token, null);
+        return Optional.ofNullable(token).map(String::trim);
     }
 
     /**
