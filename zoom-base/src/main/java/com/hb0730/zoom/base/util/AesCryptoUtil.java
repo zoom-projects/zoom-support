@@ -17,7 +17,7 @@ public class AesCryptoUtil {
 
     public static final String iv = "1234567890hjlkew"; // 长度为16个字符
 
-    private static final String mode = "AES/CBC/PKCS5Padding";
+    public static final String mode = "AES/CBC/PKCS5Padding";
 
     /**
      * AES加密,使用默认模式 AES/CBC/PKCS5Padding,默认密钥和偏移量
@@ -112,14 +112,25 @@ public class AesCryptoUtil {
      * @return 解密后的数据
      */
     public static String decrypt(String data, String mode, String key, String iv) {
-        SecretKey secretKey = KeyUtil.generateKey("AES", key.getBytes());
+        return decrypt(data, mode, key.getBytes(), iv.getBytes());
+    }
 
+
+    /**
+     * AES解密
+     *
+     * @param data 待解密数据
+     * @param keys 密钥
+     * @param iv   偏移量
+     * @return 解密后的数据
+     */
+    public static String decrypt(String data, String mode, byte[] keys, byte[] iv) {
+        SecretKey secretKey = KeyUtil.generateKey("AES", keys);
         IvParameterSpec ivParameterSpec = null;
-        if (StrUtil.isNotBlank(iv)) {
-            ivParameterSpec = new IvParameterSpec(iv.getBytes());
+        if (iv != null) {
+            ivParameterSpec = new IvParameterSpec(iv);
         }
         SymmetricCrypto crypto = new SymmetricCrypto(mode, secretKey, ivParameterSpec);
         return crypto.decryptStr(data);
     }
-
 }

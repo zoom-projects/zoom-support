@@ -1,5 +1,6 @@
 package com.hb0730.zoom.mybatis.configure;
 
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/9/24
  */
-@AutoConfiguration(before = MybatisAutoConfiguration.class)
+@AutoConfiguration(before = MybatisPlusAutoConfiguration.class)
 @MapperScan(value = "com.hb0730.**.mapper")
 @EnableTransactionManagement(proxyTargetClass = true)
 public class MybatisAutoConfiguration {

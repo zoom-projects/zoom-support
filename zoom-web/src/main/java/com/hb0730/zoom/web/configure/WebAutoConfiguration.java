@@ -5,13 +5,12 @@ import com.hb0730.zoom.web.core.handler.GlobalExceptionHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -51,8 +50,8 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
      * 配置跨域
      */
     @Bean
-    @ConditionalOnProperty(value = "zoom.api.cors", havingValue = "true")
-    public FilterRegistrationBean<CorsFilter> corsFilterBean() {
+    @ConditionalOnProperty(value = "zoom.api.cors", havingValue = "true", matchIfMissing = true)
+    public CorsConfigurationSource corsConfigurationSource() {
         // 跨域配置
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
@@ -63,7 +62,7 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
         // 创建 UrlBasedCorsConfigurationSource 对象
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-        // 创建 CorsFilter 对象
-        return new FilterRegistrationBean<>(new CorsFilter(source));
+        // 创建 CorsConfiguration 对象
+        return source;
     }
 }
