@@ -60,4 +60,20 @@ public class StrUtil extends cn.hutool.core.util.StrUtil {
             return defaultValue;
         }
     }
+
+
+    /**
+     * 任意一个是否为空
+     *
+     * @param str 字符串
+     * @return 是否为空
+     */
+    public static boolean isAnyBlank(CharSequence... str) {
+        for (CharSequence s : str) {
+            if (isBlank(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
