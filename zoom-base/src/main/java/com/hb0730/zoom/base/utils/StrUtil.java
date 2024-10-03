@@ -1,4 +1,4 @@
-package com.hb0730.zoom.base.util;
+package com.hb0730.zoom.base.utils;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import org.springframework.util.StringUtils;

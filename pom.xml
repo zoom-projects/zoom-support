@@ -36,6 +36,8 @@
         <module>zoom-mybatis</module>
         <!--web模块-->
         <module>zoom-web</module>
+        <!--脱敏模块-->
+        <module>zoom-desensitize</module>
     </modules>
 
 

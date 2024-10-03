@@ -1,4 +1,4 @@
-package com.hb0730.zoom.base.util;
+package com.hb0730.zoom.base.utils;
 
 /**
  * 16进制工具类

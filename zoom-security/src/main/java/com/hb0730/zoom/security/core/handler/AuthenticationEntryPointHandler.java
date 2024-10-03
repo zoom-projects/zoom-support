@@ -1,7 +1,7 @@
 package com.hb0730.zoom.security.core.handler;
 
 import com.hb0730.zoom.base.R;
-import com.hb0730.zoom.base.util.JsonUtil;
+import com.hb0730.zoom.base.utils.JsonUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

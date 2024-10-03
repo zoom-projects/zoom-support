@@ -2,6 +2,7 @@ package com.hb0730.zoom.base.util;
 
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.hb0730.zoom.base.utils.AesCryptoUtil;
 import org.junit.jupiter.api.Test;
 
 class AesCryptoUtilTest {

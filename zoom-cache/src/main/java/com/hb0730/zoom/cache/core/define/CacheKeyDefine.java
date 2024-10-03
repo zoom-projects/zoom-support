@@ -1,6 +1,6 @@
 package com.hb0730.zoom.cache.core.define;
 
-import com.hb0730.zoom.base.util.StrUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.cache.core.define.struct.CacheStruct;
 import com.hb0730.zoom.cache.core.define.struct.RedisCacheStruct;
 import lombok.Getter;

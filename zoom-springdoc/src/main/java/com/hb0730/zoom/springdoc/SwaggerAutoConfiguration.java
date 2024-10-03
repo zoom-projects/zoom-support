@@ -2,7 +2,7 @@ package com.hb0730.zoom.springdoc;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.hb0730.zoom.base.ZoomConst;
-import com.hb0730.zoom.base.util.StrUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.springdoc.config.SwaggerConfig;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

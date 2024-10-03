@@ -1,7 +1,7 @@
 package com.hb0730.zoom.base.security;
 
 import com.hb0730.zoom.base.ZoomConst;
-import com.hb0730.zoom.base.util.StrUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;

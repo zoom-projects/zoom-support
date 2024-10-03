@@ -1,4 +1,4 @@
-package com.hb0730.zoom.base.util;
+package com.hb0730.zoom.base.utils;
 
 /**
  * 随机工具类

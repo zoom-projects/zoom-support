@@ -1,6 +1,6 @@
 package com.hb0730.zoom.oss.core;
 
-import com.hb0730.zoom.base.util.StrUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.oss.util.OssUtil;
 import lombok.Getter;
 

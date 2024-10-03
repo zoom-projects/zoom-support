@@ -1,6 +1,6 @@
 package com.hb0730.zoom.web.configure;
 
-import com.hb0730.zoom.base.util.StrUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.web.core.handler.GlobalExceptionHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

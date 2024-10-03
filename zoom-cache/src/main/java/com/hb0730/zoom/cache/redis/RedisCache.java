@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.Assert;
 import com.google.common.collect.Maps;
-import com.hb0730.zoom.base.util.JsonUtil;
+import com.hb0730.zoom.base.utils.JsonUtil;
 import com.hb0730.zoom.cache.core.ICache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

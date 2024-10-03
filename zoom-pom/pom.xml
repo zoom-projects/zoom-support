@@ -184,6 +184,11 @@
                 <artifactId>zoom-web</artifactId>
                 <version>${zoom.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.hb0730</groupId>
+                <artifactId>zoom-desensitize</artifactId>
+                <version>${zoom.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

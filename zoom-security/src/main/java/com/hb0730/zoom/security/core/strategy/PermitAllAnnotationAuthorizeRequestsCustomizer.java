@@ -1,6 +1,6 @@
 package com.hb0730.zoom.security.core.strategy;
 
-import com.hb0730.zoom.base.util.CollectionUtil;
+import com.hb0730.zoom.base.utils.CollectionUtil;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpMethod;

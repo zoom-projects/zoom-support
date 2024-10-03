@@ -1,6 +1,6 @@
 package com.hb0730.zoom.oss.util;
 
-import com.hb0730.zoom.base.util.StrUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 
 /**
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>

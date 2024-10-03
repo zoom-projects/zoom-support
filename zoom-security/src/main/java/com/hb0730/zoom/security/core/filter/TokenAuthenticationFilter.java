@@ -3,7 +3,7 @@ package com.hb0730.zoom.security.core.filter;
 import com.hb0730.zoom.base.R;
 import com.hb0730.zoom.base.security.SecurityUtils;
 import com.hb0730.zoom.base.security.UserInfo;
-import com.hb0730.zoom.base.util.ServletUtil;
+import com.hb0730.zoom.base.utils.ServletUtil;
 import com.hb0730.zoom.security.core.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

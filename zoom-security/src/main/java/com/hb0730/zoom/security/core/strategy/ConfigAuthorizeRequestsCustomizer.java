@@ -1,6 +1,6 @@
 package com.hb0730.zoom.security.core.strategy;
 
-import com.hb0730.zoom.base.util.CollectionUtil;
+import com.hb0730.zoom.base.utils.CollectionUtil;
 import com.hb0730.zoom.security.configuration.config.SecurityConfig;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;

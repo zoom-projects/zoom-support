@@ -2,7 +2,7 @@ package com.hb0730.zoom.oss.core.s3;
 
 import cn.hutool.core.net.URLDecoder;
 import com.hb0730.zoom.base.exception.ZoomException;
-import com.hb0730.zoom.base.util.StrUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.oss.core.AbstractOssStorage;
 import lombok.Getter;
 import lombok.Setter;
