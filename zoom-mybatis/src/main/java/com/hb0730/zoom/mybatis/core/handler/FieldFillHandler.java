@@ -32,13 +32,13 @@ public class FieldFillHandler implements MetaObjectHandler {
             setFieldValByName("created", date, metaObject);
         }
         if (metaObject.hasSetter("createdBy")) {
-            setFieldValByName("createdBy", userInfo.getId(), metaObject);
+            setFieldValByName("createdBy", userInfo.getUsername(), metaObject);
         }
         if (metaObject.hasSetter("modified")) {
             setFieldValByName("modified", date, metaObject);
         }
         if (metaObject.hasSetter("modifiedBy")) {
-            setFieldValByName("modifiedBy", userInfo.getId(), metaObject);
+            setFieldValByName("modifiedBy", userInfo.getUsername(), metaObject);
         }
 
     }

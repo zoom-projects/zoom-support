@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -83,11 +84,61 @@ public class DataQuery<T> {
     }
 
     /**
+     * 是否不存在
+     *
+     * @return Optional<Boolean>
+     */
+    public Optional<Boolean> absentOptional() {
+        return Optional.of(absent());
+    }
+
+    /**
      * 是否存在
      *
      * @return true 存在
      */
     public boolean present() {
         return count() > 0;
+    }
+
+    // -------------------- list --------------------
+
+    /**
+     * 列表
+     *
+     * @return List<T>
+     */
+    public List<T> list() {
+        return mapper.selectList(wrapper);
+    }
+
+    /**
+     * 列表
+     *
+     * @return Optional<List < T>>
+     */
+    public Optional<List<T>> listOptional() {
+        return Optional.of(list());
+    }
+
+    // -------------------- one --------------------
+
+    /**
+     * 获取一个
+     *
+     * @return T
+     */
+    public T one() {
+        List<T> res = mapper.selectList(wrapper);
+        return res.isEmpty() ? null : res.get(0);
+    }
+
+    /**
+     * 获取一个
+     *
+     * @return Optional<T>
+     */
+    public Optional<T> oneOptional() {
+        return Optional.ofNullable(one());
     }
 }

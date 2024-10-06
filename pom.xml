@@ -34,6 +34,8 @@
         <module>zoom-security</module>
         <!--mybatis模块-->
         <module>zoom-mybatis</module>
+        <!--mybatis扩展模块-->
+        <module>zoom-mybatis-ext</module>
         <!--web模块-->
         <module>zoom-web</module>
         <!--脱敏模块-->
