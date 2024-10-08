@@ -13,6 +13,7 @@ import com.hb0730.zoom.mybatis.query.core.AbstractQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.EqualsQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.GreaterThanEqualQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.GreaterThanQueryHandler;
+import com.hb0730.zoom.mybatis.query.core.impl.InQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.IsNullQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.LessThanEqualQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.LessThanQueryHandler;
@@ -50,6 +51,7 @@ public class QueryHelper {
         register(new LessThanQueryHandler());
         register(new LessThanEqualQueryHandler());
         register(new IsNullQueryHandler());
+        register(new InQueryHandler());
     }
 
     /**
