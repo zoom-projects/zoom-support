@@ -1,6 +1,7 @@
 package com.hb0730.zoom.desensitize.core.annotation;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hb0730.zoom.base.enums.MaskEnums;
 
 import java.lang.annotation.Documented;
@@ -21,6 +22,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @JacksonAnnotationsInside
+@JsonSerialize(using = com.hb0730.zoom.desensitize.core.serializer.DesensitizeJsonSerializer.class)
 public @interface FieldMask {
 
     /**

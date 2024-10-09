@@ -3,6 +3,7 @@ package com.hb0730.zoom.desensitize.configuration;
 import com.hb0730.zoom.desensitize.core.serializer.DesensitizeJsonSerializer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
@@ -10,7 +11,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/10/3
  */
-@AutoConfiguration
+@AutoConfiguration(after = HttpMessageConvertersAutoConfiguration.class)
 public class DesensitizeAutoConfiguration {
 
     /**
