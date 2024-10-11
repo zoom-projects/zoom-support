@@ -40,6 +40,8 @@
         <module>zoom-web</module>
         <!--脱敏模块-->
         <module>zoom-desensitize</module>
+        <!--操作日志模块-->
+        <module>zoom-operator-log</module>
     </modules>
 
 

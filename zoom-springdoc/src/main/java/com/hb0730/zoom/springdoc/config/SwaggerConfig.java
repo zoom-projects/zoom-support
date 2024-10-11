@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -70,7 +72,7 @@ public class SwaggerConfig {
         /**
          * 路径
          */
-        private String path;
+        private List<String> path = new ArrayList<>();
 
     }
 }

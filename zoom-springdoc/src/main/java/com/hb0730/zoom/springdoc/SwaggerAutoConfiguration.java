@@ -1,8 +1,8 @@
 package com.hb0730.zoom.springdoc;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.StrUtil;
 import com.hb0730.zoom.base.ZoomConst;
-import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.springdoc.config.SwaggerConfig;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -23,6 +23,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -100,7 +101,7 @@ public class SwaggerAutoConfiguration {
     public GroupedOpenApi allGroupedOpenApi(ConfigurableListableBeanFactory beanFactory,
                                             SwaggerConfig properties) {
         // 全部
-        GroupedOpenApi all = this.buildGroupedOpenApi(apiPrefix, "全部", "*");
+        GroupedOpenApi all = this.buildGroupedOpenApi(apiPrefix, "全部", List.of("*"));
         // 注册模块分组 api
         if (CollectionUtil.isNotEmpty(properties.getGroupedApi())) {
             properties.getGroupedApi().forEach((t, v) -> {
@@ -118,14 +119,17 @@ public class SwaggerAutoConfiguration {
      * @param path  path
      * @return group
      */
-    private GroupedOpenApi buildGroupedOpenApi(String apiPrefix, String group, String path) {
-        String pathPattern = "/" + path + "/**";
-        if (StrUtil.isNotBlank(apiPrefix)) {
-            pathPattern = apiPrefix + pathPattern;
-        }
+    private GroupedOpenApi buildGroupedOpenApi(String apiPrefix, String group, List<String> path) {
+        List<String> pathPatterns = path.stream().map(p -> {
+            String pathPattern = "/" + p + "/**";
+            if (StrUtil.isNotBlank(apiPrefix)) {
+                pathPattern = apiPrefix + pathPattern;
+            }
+            return pathPattern;
+        }).toList();
         return GroupedOpenApi.builder()
                 .group(group)
-                .pathsToMatch(pathPattern)
+                .pathsToMatch(pathPatterns.toArray(new String[0]))
                 .addOperationCustomizer((operation, handlerMethod) -> operation
                         .addParametersItem(buildSecurityHeaderParameter()))
                 .build();

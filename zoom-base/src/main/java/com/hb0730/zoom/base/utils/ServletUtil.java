@@ -1,6 +1,7 @@
 package com.hb0730.zoom.base.utils;
 
 import com.hb0730.zoom.base.R;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
@@ -11,7 +12,25 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 
 public class ServletUtil extends cn.hutool.extra.servlet.JakartaServletUtil {
+    /**
+     * 获取 ip 位置
+     *
+     * @param ip ip
+     * @return ip 位置
+     */
+    public static String getLocal(String ip) {
+        return "";
+    }
 
+    /**
+     * 获取请求的User-Agent
+     *
+     * @param request 请求
+     * @return User-Agent
+     */
+    public static String getUserAgent(HttpServletRequest request) {
+        return request.getHeader("User-Agent");
+    }
 
     /**
      * 写出json,并设置contentType为application/json;charset=UTF-8

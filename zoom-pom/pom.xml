@@ -191,7 +191,18 @@
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
-                <artifactId>zoom-desensitize</artifactId>
+                <artifactId>zoom-desensitize-core</artifactId>
+                <version>${zoom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hb0730</groupId>
+                <artifactId>zoom-desensitize-web</artifactId>
+                <version>${zoom.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.hb0730</groupId>
+                <artifactId>zoom-operator-log</artifactId>
                 <version>${zoom.version}</version>
             </dependency>
         </dependencies>
