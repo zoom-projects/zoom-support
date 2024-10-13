@@ -73,13 +73,14 @@ public class CacheUtil implements ICache {
 
     @Override
     public void delScan(String pattern) {
-        if (StrUtil.isBlank(pattern)) {
+        String _pattern = normalizeKey(pattern);
+        if (StrUtil.isBlank(_pattern)) {
             return;
         }
-        if (!pattern.endsWith("*")) {
-            pattern += "*";
+        if (!_pattern.endsWith("*")) {
+            _pattern += "*";
         }
-        cache.delScan(pattern);
+        cache.delScan(_pattern);
     }
 
     @Override

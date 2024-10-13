@@ -50,15 +50,16 @@ public class RedisConfig implements CachingConfigurer {
                 // 设置key序列化器
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 // 设置value序列化器
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
+                .computePrefixWith(cacheName -> cacheProperties.getPrefix() + ":" + cacheName + ":");
 
         RedisCacheWriter cacheWriter = RedisCacheWriter.lockingRedisCacheWriter(connectionFactory);
         HashMap<String, RedisCacheConfiguration> cacheConfig = new HashMap<>();
 
         Map<String, Long> customCacheConfigs = customCacheConfig.getCustomCacheConfigs();
         for (String key : customCacheConfigs.keySet()) {
-            String cacheKey = String.format("%s%s", key.startsWith(cacheProperties.getPrefix() + ":") ? "" : cacheProperties.getPrefix() + ":", key);
-            cacheConfig.put(cacheKey, RedisCacheConfiguration.defaultCacheConfig()
+            // key 即为cacheName @see AbstractCacheManager#getCache(String name)
+            cacheConfig.put(key, defaultCacheConfig
                     .entryTtl(Duration.ofSeconds(customCacheConfigs.get(key)))
                     .disableCachingNullValues());
         }

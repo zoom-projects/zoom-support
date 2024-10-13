@@ -8,6 +8,7 @@ import com.hb0730.zoom.base.PairEnum;
  *
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/10/3
+ * @deprecated 已采用dict
  */
 public enum MenuTypeEnums implements PairEnum<Integer, Pair<Integer, String>> {
     /**

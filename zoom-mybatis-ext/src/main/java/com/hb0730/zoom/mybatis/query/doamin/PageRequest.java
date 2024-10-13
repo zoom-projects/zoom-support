@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @Schema(description = "分页参数")
-public class PageParams implements Serializable {
+public class PageRequest implements Serializable {
     /**
      * 操作人
      */
