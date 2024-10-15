@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -66,7 +65,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
      */
     public void setLoginUser(UserInfo loginUser, HttpServletRequest request) {
         // 创建 authentication
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginUser, null, Collections.emptyList());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginUser, null,
+                loginUser.getAuthorities());
         if (request != null) {
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         }

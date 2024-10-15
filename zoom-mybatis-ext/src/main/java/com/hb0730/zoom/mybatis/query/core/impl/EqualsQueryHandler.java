@@ -20,10 +20,10 @@ public class EqualsQueryHandler extends AbstractQueryHandler {
     public void buildQuery(QueryWrapper<?> queryWrapper, String column, Object value, Annotation annotation) {
         if (null != annotation) {
             Equals equals = (Equals) annotation;
-            if (null == value && equals.allowNull()) {
+            if ((null == value || "".equals(value)) && equals.allowNull()) {
                 queryWrapper.isNull(column);
                 return;
-            } else if (null == value) {
+            } else if (null == value || "".equals(value)) {
                 return;
             }
         }
