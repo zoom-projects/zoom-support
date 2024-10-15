@@ -4,8 +4,6 @@ import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.mybatis.core.encrypt.MybatisEncryptService;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedJdbcTypes;
-import org.apache.ibatis.type.MappedTypes;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -18,8 +16,8 @@ import java.sql.SQLException;
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/10/3
  */
-@MappedJdbcTypes({JdbcType.VARCHAR})
-@MappedTypes({String.class})
+//@MappedJdbcTypes({JdbcType.VARCHAR})
+//@MappedTypes({String.class})
 public class EncryptTypeHandler extends BaseTypeHandler<String> {
     private final MybatisEncryptService mybatisEncryptService;
 

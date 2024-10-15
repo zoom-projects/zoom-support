@@ -31,4 +31,9 @@ public @interface LessThan {
      */
     boolean underCamel() default true;
 
+    /**
+     * 是否添加{@code  is_}前缀，只针对Boolean类型有效，默认为 {@code false}.
+     */
+    boolean isPrefix() default false;
+
 }

@@ -28,6 +28,7 @@ import org.springframework.beans.BeanUtils;
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,16 +151,13 @@ public class QueryHelper {
             throw new ZoomException("构建【" + annotation.getClass().getName()
                     + "】注解的条件时，反射调用获取对应的属性字段值异常。", e);
         }
-        boolean underCamel = true;
-        try {
-            underCamel = (boolean) annotation.getClass().getMethod("underCamel").invoke(annotation);
-        } catch (ReflectiveOperationException ignored) {
-        }
+        // 驼峰转下划线
+        boolean underCamel = (boolean) getAnnotationValue(annotation, "underCamel", true);
         if (underCamel) {
             column = StrUtil.toUnderlineCase(column);
         }
-        // boolean类型自动添加 is_
-        if (field.getType().equals(Boolean.class) || field.getType().equals(boolean.class)) {
+        // 添加`is_` 前缀
+        if (isPrefix(annotation, field)) {
             column = "is_" + column;
         }
         return column;
@@ -231,6 +229,27 @@ public class QueryHelper {
         }
         return page;
 
+    }
+
+    /**
+     * 是否添加is_前缀
+     *
+     * @param annotation 注解
+     * @param field      字段
+     * @return boolean
+     */
+    private static boolean isPrefix(Annotation annotation, Field field) {
+        boolean isPrefix = (boolean) getAnnotationValue(annotation, "isPrefix", false);
+        List<Class<?>> types = Arrays.asList(Boolean.class, boolean.class);
+        return isPrefix && types.contains(field.getType());
+    }
+
+    private static Object getAnnotationValue(Annotation annotation, String methodName, Object defaultValue) {
+        try {
+            return annotation.getClass().getMethod(methodName).invoke(annotation);
+        } catch (ReflectiveOperationException e) {
+            return defaultValue;
+        }
     }
 
 }

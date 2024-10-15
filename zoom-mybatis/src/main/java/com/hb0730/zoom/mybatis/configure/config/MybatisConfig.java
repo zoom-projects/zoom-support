@@ -1,5 +1,6 @@
 package com.hb0730.zoom.mybatis.configure.config;
 
+import com.hb0730.zoom.mybatis.core.enums.Algorithm;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -55,20 +56,5 @@ public class MybatisConfig {
          * 加密向量
          */
         private String iv;
-    }
-
-    /**
-     * 加密算法
-     */
-    public static enum Algorithm {
-        /**
-         * AES
-         */
-        AES,
-        /**
-         * BASE64
-         */
-        BASE64,
-        ;
     }
 }

@@ -38,6 +38,15 @@ class AesCryptoUtilTest {
     }
 
     @Test
+    void testEncrypt() {
+        String key = "1234567890adbcde";
+        String iv = "1234567890hjlkew";
+        String data = "";
+        String encrypt = AesCryptoUtil.encrypt(data, key, iv);
+        System.out.println(encrypt);
+    }
+
+    @Test
     void testDecrypt() {
         String iv = "NklZqaGgkvy7BH69";
         String timestamp = "1727854248033";

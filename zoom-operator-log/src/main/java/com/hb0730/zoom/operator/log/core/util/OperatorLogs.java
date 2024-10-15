@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hb0730.zoom.base.exception.ZoomException;
 import com.hb0730.zoom.base.security.UserInfo;
 import com.hb0730.zoom.base.utils.MapUtil;
+import com.hb0730.zoom.operator.log.core.define.Wrapper;
 
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -79,6 +81,13 @@ public class OperatorLogs {
         }
         if (obj instanceof Map) {
             EXTRA_HOLDER.get().putAll((Map<String, ?>) obj);
+        } else if (obj instanceof Collection<?>) {
+            Wrapper<Object> objectWrapper = new Wrapper<>(obj);
+            try {
+                EXTRA_HOLDER.get().putAll(objectMapper.readValue(objectMapper.writeValueAsBytes(objectWrapper), Map.class));
+            } catch (Exception e) {
+                throw new ZoomException(e);
+            }
         } else {
             try {
                 EXTRA_HOLDER.get().putAll(objectMapper.readValue(objectMapper.writeValueAsBytes(obj), Map.class));
