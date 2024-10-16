@@ -15,6 +15,25 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    /**
+     * HttpRequestMethodNotSupportedException 异常处理
+     *
+     * @param e 异常
+     * @return {@link R}
+     */
+    @ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
+    public R<?> handlerHttpRequestMethodNotSupportedException(Exception e) {
+        log.error("HttpRequestMethodNotSupportedException", e);
+        return R.NG("请求方式不支持" + e.getMessage());
+    }
+
+    @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)
+    public R<?> handlerNoResourceFoundException(Exception e) {
+        log.error("NoResourceFoundException", e);
+        return R.NG("资源不存在" + e.getMessage());
+    }
+
     /**
      * ZoomException 异常处理
      *
