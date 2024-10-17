@@ -42,6 +42,8 @@
         <module>zoom-desensitize</module>
         <!--操作日志模块-->
         <module>zoom-operator-log</module>
+        <!--sofa-rpc模块-->
+        <module>zoom-sofa-rpc</module>
     </modules>
 
 

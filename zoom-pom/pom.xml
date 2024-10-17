@@ -18,6 +18,7 @@
         <zoom.version>1.0.0-SNAPSHOT</zoom.version>
 
         <springboot.version>3.3.4</springboot.version>
+        <sofa-boot.version>4.4.0</sofa-boot.version>
         <mysql.version>8.3.0</mysql.version>
         <mybatis-plus.version>3.5.8</mybatis-plus.version>
         <springdoc.version>2.6.0</springdoc.version>
@@ -51,6 +52,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
                 <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--sofa boot 用来解决sofa rpc https://github.com/sofastack/sofa-rpc/issues/1031-->
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofaboot-dependencies</artifactId>
+                <version>${sofa-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -203,6 +212,12 @@
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-operator-log</artifactId>
+                <version>${zoom.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.hb0730</groupId>
+                <artifactId>zoom-sofa-rpc</artifactId>
                 <version>${zoom.version}</version>
             </dependency>
         </dependencies>
