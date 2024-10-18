@@ -177,7 +177,6 @@ public class WebSecurityAutoConfiguration {
         return new ConsoleAuthorizeRequestsCustomizer(adminSeverContextPath, managementEndpoints);
     }
 
-
     /**
      * 安全过滤器链
      * <p>

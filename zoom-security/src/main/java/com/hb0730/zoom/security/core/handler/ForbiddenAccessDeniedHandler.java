@@ -7,6 +7,8 @@ import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.io.IOException;
 
@@ -19,8 +21,10 @@ import java.io.IOException;
  * @date 2024/9/24
  */
 @Slf4j
+@ControllerAdvice
 public class ForbiddenAccessDeniedHandler implements AccessDeniedHandler {
     @Override
+    @ExceptionHandler(AccessDeniedException.class)
     public void handle(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         log.warn("AccessDeniedHandlerImpl-handle-forbidden {} {}", SecurityUtils.getLoginUserId(), request.getRequestURI());
         R<Object> jr = R.NG(403, "无操作权限");
