@@ -7,8 +7,8 @@ import com.alipay.sofa.rpc.ext.Extension;
 import com.alipay.sofa.rpc.filter.AutoActive;
 import com.alipay.sofa.rpc.filter.Filter;
 import com.alipay.sofa.rpc.filter.FilterInvoker;
+import com.hb0730.zoom.base.AppUtil;
 import com.hb0730.zoom.opentelemetry.sofa.rpc.SofaRpcTelemetry;
-import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.context.Context;
 import io.opentelemetry.instrumentation.api.instrumenter.Instrumenter;
 import lombok.extern.slf4j.Slf4j;
@@ -24,15 +24,15 @@ public class ServerTracerFilter extends Filter {
     private final Instrumenter<SofaRequest, SofaResponse> serverInstrumenter;
 
     public ServerTracerFilter() {
-//        Instrumenter<SofaRequest, SofaResponse> _serverInstrumenter = null;
-//        try {
-//
-//            SofaRpcTelemetry sofaRpcTelemetry = AppUtil.getBean(SofaRpcTelemetry.class);
-//            _serverInstrumenter = sofaRpcTelemetry.getServerInstrumenter();
-//        } catch (Exception ignore) {
-//        }
-//        serverInstrumenter = _serverInstrumenter;
-        serverInstrumenter = SofaRpcTelemetry.create(GlobalOpenTelemetry.get()).getClientInstrumenter();
+        Instrumenter<SofaRequest, SofaResponse> _serverInstrumenter = null;
+        try {
+
+            SofaRpcTelemetry sofaRpcTelemetry = AppUtil.getBean(SofaRpcTelemetry.class);
+            _serverInstrumenter = sofaRpcTelemetry.getServerInstrumenter();
+        } catch (Exception ignore) {
+        }
+        serverInstrumenter = _serverInstrumenter;
+//        serverInstrumenter = SofaRpcTelemetry.create(GlobalOpenTelemetry.get()).getClientInstrumenter();
     }
 
 
