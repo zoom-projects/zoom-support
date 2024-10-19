@@ -1,12 +1,12 @@
 package com.hb0730.zoom.sofa.rpc.core.service;
 
 import com.alipay.sofa.rpc.boot.runtime.param.BoltBindingParam;
-import com.alipay.sofa.runtime.api.client.ClientFactory;
 import com.alipay.sofa.runtime.api.client.ReferenceClient;
 import com.alipay.sofa.runtime.api.client.param.ReferenceParam;
 import com.hb0730.zoom.base.AppUtil;
 import com.hb0730.zoom.sofa.rpc.core.config.ConfigManager;
 import com.hb0730.zoom.sofa.rpc.core.config.RpcConfigProperties;
+import com.hb0730.zoom.sofa.rpc.core.factory.SofaRpcClientFactoryBean;
 import lombok.Getter;
 
 import java.lang.reflect.ParameterizedType;
@@ -26,10 +26,13 @@ public abstract class BaseRpcService<T> implements IRpcService {
 
     @SuppressWarnings("unchecked")
     public BaseRpcService() {
-        Type type = getClass().getGenericSuperclass();
-        if (type instanceof ParameterizedType) {
-            Type[] parameterizedType = ((ParameterizedType) type).getActualTypeArguments();
-            this.rpcInterfaceClazz = (Class<T>) parameterizedType[0];
+        Type type = this.getClass().getGenericSuperclass();
+        if (type instanceof ParameterizedType
+                && ((ParameterizedType) type).getActualTypeArguments().length > 0) {
+            Type t = ((ParameterizedType) type).getActualTypeArguments()[0];
+            if (!"T".equals(t.getTypeName())) {
+                this.rpcInterfaceClazz = (Class<T>) t;
+            }
         }
     }
 
@@ -114,8 +117,8 @@ public abstract class BaseRpcService<T> implements IRpcService {
      * @return RPC接口
      */
     protected T getRpcService(String server, Class<T> clazz) {
-        ClientFactory clientFactory = AppUtil.getBean(ClientFactory.class);
-        ReferenceClient referenceClient = clientFactory.getClient(ReferenceClient.class);
+        SofaRpcClientFactoryBean clientFactoryBean = AppUtil.getBean(SofaRpcClientFactoryBean.class);
+        ReferenceClient referenceClient = clientFactoryBean.getClientFactory().getClient(ReferenceClient.class);
         ReferenceParam<T> referenceParam = new ReferenceParam<>();
         referenceParam.setInterfaceType(clazz);
 

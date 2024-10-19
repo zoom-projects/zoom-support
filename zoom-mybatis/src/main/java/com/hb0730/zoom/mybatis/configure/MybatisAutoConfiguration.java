@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.hb0730.zoom.base.exception.ZoomException;
 import com.hb0730.zoom.mybatis.configure.config.MybatisConfig;
 import com.hb0730.zoom.mybatis.core.encrypt.AesMybatisEncryptService;
 import com.hb0730.zoom.mybatis.core.encrypt.Base64MybatisEncryptService;
 import com.hb0730.zoom.mybatis.core.encrypt.MybatisEncryptService;
+import com.hb0730.zoom.mybatis.core.encrypt.NonMybatisEncryptService;
 import com.hb0730.zoom.mybatis.core.enums.Algorithm;
 import com.hb0730.zoom.mybatis.core.handler.FieldFillHandler;
 import com.hb0730.zoom.mybatis.core.interceptor.MyBatisDecryptInterceptor;
@@ -58,7 +58,7 @@ public class MybatisAutoConfiguration {
     @Bean
     @ConditionalOnProperty(prefix = "zoom.mybatis", name = "pagination", havingValue = "true", matchIfMissing = true)
     public PaginationInnerInterceptor mybatisPlusPaginationInterceptor() {
-        return new PaginationInnerInterceptor();
+        return paginationInnerInterceptor();
     }
 
     /**
@@ -92,7 +92,6 @@ public class MybatisAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "zoom.mybatis", name = "encrypt.enable", havingValue = "true")
     public MybatisEncryptService mybatisPlusEncryptInterceptor(MybatisConfig mybatisConfig) {
         MybatisConfig.Encrypt encrypt = mybatisConfig.getEncrypt();
         MybatisEncryptService mybatisEncryptService;
@@ -104,8 +103,7 @@ public class MybatisAutoConfiguration {
         } else if (Algorithm.BASE64.equals(encrypt.getAlgorithm())) {
             mybatisEncryptService = new Base64MybatisEncryptService();
         } else {
-
-            throw new ZoomException("不支持的加密算法 " + encrypt.getAlgorithm());
+            mybatisEncryptService = new NonMybatisEncryptService();
         }
         return mybatisEncryptService;
     }

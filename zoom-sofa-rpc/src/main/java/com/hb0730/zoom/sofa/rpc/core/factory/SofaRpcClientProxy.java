@@ -1,6 +1,5 @@
 package com.hb0730.zoom.sofa.rpc.core.factory;
 
-import com.hb0730.zoom.sofa.rpc.core.RpcApi;
 import com.hb0730.zoom.sofa.rpc.core.service.BaseRpcService;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
@@ -12,9 +11,9 @@ import java.lang.reflect.Method;
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/10/17
  */
-public class SofaRpcClientProxy<T extends RpcApi> extends BaseRpcService<SofaRpcClientProxy<T>> implements MethodInterceptor {
-    private String appName;
-    private Class<T> rpcApi;
+public class SofaRpcClientProxy<T> extends BaseRpcService<T> implements MethodInterceptor {
+    private final String appName;
+    private final Class<T> rpcApi;
 
     @SuppressWarnings("unchecked")
     public T proxy() {
@@ -38,5 +37,14 @@ public class SofaRpcClientProxy<T extends RpcApi> extends BaseRpcService<SofaRpc
     protected String getAppName() {
         return this.appName;
     }
-    
+
+    @Override
+    public Class<T> getRpcInterfaceClazz() {
+        return this.rpcApi;
+    }
+
+    @Override
+    public T getRpcService() {
+        return getRpcService(this.appName);
+    }
 }

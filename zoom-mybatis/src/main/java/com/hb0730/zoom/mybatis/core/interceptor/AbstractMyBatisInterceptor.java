@@ -8,6 +8,7 @@ import com.hb0730.zoom.mybatis.core.annotation.FieldEncrypt;
 import com.hb0730.zoom.mybatis.core.encrypt.AesMybatisEncryptService;
 import com.hb0730.zoom.mybatis.core.encrypt.Base64MybatisEncryptService;
 import com.hb0730.zoom.mybatis.core.encrypt.MybatisEncryptService;
+import com.hb0730.zoom.mybatis.core.encrypt.NonMybatisEncryptService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.mapping.MappedStatement;
 
@@ -68,6 +69,7 @@ public class AbstractMyBatisInterceptor {
         return switch (fieldEncrypt.algorithm()) {
             case AES -> new AesMybatisEncryptService(fieldEncrypt.key(), fieldEncrypt.iv());
             case BASE64 -> new Base64MybatisEncryptService();
+            case NON -> new NonMybatisEncryptService();
             default -> AppUtil.getBean(MybatisEncryptService.class);
         };
     }

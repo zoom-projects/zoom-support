@@ -1,5 +1,6 @@
-package com.hb0730.zoom.base.utils;
+package com.hb0730.zoom.base.util;
 
+import com.hb0730.zoom.base.utils.PasswdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 

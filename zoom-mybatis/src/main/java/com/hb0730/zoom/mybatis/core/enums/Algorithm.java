@@ -13,7 +13,10 @@ public enum Algorithm {
      * BASE64
      */
     BASE64,
-
+    /**
+     * 不加密
+     */
+    NON,
     /**
      * 全局-默认AES
      */

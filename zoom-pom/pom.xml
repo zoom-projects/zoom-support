@@ -21,6 +21,7 @@
         <sofa-boot.version>4.4.0</sofa-boot.version>
         <mysql.version>8.3.0</mysql.version>
         <mybatis-plus.version>3.5.8</mybatis-plus.version>
+        <dynamic-datasource.version>4.3.0</dynamic-datasource.version>
         <springdoc.version>2.6.0</springdoc.version>
         <lombok.version>1.18.22</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
@@ -28,6 +29,7 @@
         <guava.version>31.0.1-jre</guava.version>
         <aws-s3.version>2.25.27</aws-s3.version>
         <alibaba-ttl.version>2.13.0</alibaba-ttl.version>
+        <commons-text.version>1.9</commons-text.version>
 
         <slf4j.version>2.0.6</slf4j.version>
     </properties>
@@ -104,6 +106,12 @@
                 <artifactId>mybatis-plus-extension</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
+            <!--dynamic-datasource-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+                <version>${dynamic-datasource.version}</version>
+            </dependency>
             <!--springdoc-openapi-->
             <dependency>
                 <groupId>org.springdoc</groupId>
@@ -149,6 +157,12 @@
                 <groupId>software.amazon.awssdk</groupId>
                 <artifactId>apache-client</artifactId>
                 <version>${aws-s3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>${commons-text.version}</version>
             </dependency>
 
 

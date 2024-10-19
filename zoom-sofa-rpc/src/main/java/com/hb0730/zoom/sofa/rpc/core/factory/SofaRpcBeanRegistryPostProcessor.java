@@ -1,7 +1,9 @@
 package com.hb0730.zoom.sofa.rpc.core.factory;
 
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.sofa.rpc.core.RpcApi;
 import com.hb0730.zoom.sofa.rpc.core.annotation.RpcAppName;
+import com.hb0730.zoom.sofa.rpc.core.annotation.RpcPkg;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -33,20 +35,21 @@ public class SofaRpcBeanRegistryPostProcessor implements BeanDefinitionRegistryP
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         log.info("~~动态注册RPC动态代理客户端~~");
-        Map<String, List<Class<? extends RpcApi>>> rpcApi = getRpcApi();
-        if (null == rpcApi || rpcApi.isEmpty()) {
+        Map<String, List<Class<?>>> rpcApi = getRpcApi();
+        if (rpcApi.isEmpty()) {
             return;
         }
-        Set<Map.Entry<String, List<Class<? extends RpcApi>>>> entries = rpcApi.entrySet();
-        for (Map.Entry<String, List<Class<? extends RpcApi>>> entry : entries) {
+        Set<Map.Entry<String, List<Class<?>>>> entries = rpcApi.entrySet();
+        for (Map.Entry<String, List<Class<?>>> entry : entries) {
             String appName = entry.getKey();
-            List<Class<? extends RpcApi>> rpcApis = entry.getValue();
-            for (Class<? extends RpcApi> rpcApiClass : rpcApis) {
+            List<Class<?>> rpcApis = entry.getValue();
+            for (Class<?> rpcApiClass : rpcApis) {
                 RootBeanDefinition beanDefinition = new RootBeanDefinition();
                 beanDefinition.setBeanClass(rpcApiClass);
                 SofaRpcClientProxy<?> proxy = new SofaRpcClientProxy<>(appName, rpcApiClass);
                 beanDefinition.setInstanceSupplier(proxy::proxy);
-                registry.registerBeanDefinition(rpcApiClass.getName(), beanDefinition);
+                String beanName = String.format("%s#%s", appName, rpcApiClass.getName());
+                registry.registerBeanDefinition(beanName, beanDefinition);
             }
         }
     }
@@ -64,45 +67,55 @@ public class SofaRpcBeanRegistryPostProcessor implements BeanDefinitionRegistryP
         return items;
     }
 
-    @SuppressWarnings("unchecked")
-    private Map<String, List<Class<? extends RpcApi>>> getRpcApi() {
+    private Map<String, List<Class<?>>> getRpcApi() {
         List<String> ignoreItems = getIgnoreItems();
-        Map<String, List<Class<? extends RpcApi>>> rpcApi = new HashMap<>();
+        Map<String, List<Class<?>>> rpcApi = new HashMap<>();
         try {
             DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
             Resource[] resources = ResourcePatternUtils.getResourcePatternResolver(resourceLoader)
                     .getResources(RPC_API_PATH);
             for (Resource resource : resources) {
                 MetadataReader metadataReader = new SimpleMetadataReaderFactory(resourceLoader).getMetadataReader(resource);
-                Class<?> aClass = ClassUtils.forName(metadataReader.getClassMetadata().getClassName(),
+                Class<?> clazz = ClassUtils.forName(metadataReader.getClassMetadata().getClassName(),
                         SofaRpcBeanRegistryPostProcessor.class.getClassLoader());
                 String appName = null;
-                RpcAppName annotation = AnnotationUtils.getAnnotation(aClass, RpcAppName.class);
-                if (null == annotation) {
-                    log.warn("跳过注册RpcApi:{}没有RpcAppName注解", aClass.getName());
+                if (clazz.isAssignableFrom(RpcApi.class)) {
+                    appName = getRpcPkgValue(clazz);
+                }
+                if (StrUtil.isBlank(appName)) {
+                    RpcAppName annotation = AnnotationUtils.getAnnotation(clazz, RpcAppName.class);
+                    if (null != annotation) {
+                        appName = annotation.value();
+                    }
+                }
+
+                if (StrUtil.isBlank(appName)) {
+                    log.warn("跳过注册RpcApi: {} ", clazz.getName());
                     continue;
                 }
-                appName = annotation.value();
-                if (null == appName || appName.isEmpty()) {
-                    log.warn("跳过注册RpcApi:{} RpcAppName注解为空", aClass.getName());
-                    continue;
-                }
-                if (ignoreItems.contains(aClass.getName())) {
-                    log.warn("跳过注册RpcApi:{}#{}在忽略列表中", appName, aClass.getName());
+                if (ignoreItems.contains(appName)) {
+                    log.warn("跳过注册RpcApi: {}#{} 在忽略列表中", appName, clazz.getName());
                     continue;
                 }
                 if (!rpcApi.containsKey(appName)) {
                     rpcApi.put(appName, new ArrayList<>());
                 }
-                log.info("注册成功RpcApi:{}#{}", appName, aClass.getName());
-                rpcApi.get(appName).add((Class<? extends RpcApi>) aClass);
+                log.info("注册成功RpcApi: {}#{} ", appName, clazz.getName());
+                rpcApi.get(appName).add(clazz);
             }
 
         } catch (Exception e) {
             log.error("~~动态注册RPC动态代理客户端失败~~", e);
         }
 
-        return null;
+        return rpcApi;
     }
 
+    private static String getRpcPkgValue(Class<?> clazz) {
+        RpcPkg annotation = clazz.getPackage().getAnnotation(RpcPkg.class);
+        if (null != annotation) {
+            return annotation.value();
+        }
+        return null;
+    }
 }

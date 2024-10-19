@@ -12,6 +12,7 @@ import com.hb0730.zoom.base.PairEnum;
 public enum LoginGrantEnums implements PairEnum<String, Pair<String, String>> {
     PASSWORD(new Pair<>("password", "账号(身份证,邮箱,用户名)密码登录")),
     MOBILE(new Pair<>("mobile", "手机号登录")),
+    EMAIL(new Pair<>("email", "邮箱登录")),
     WECHAT(new Pair<>("wechat", "微信小程序登录")),
     WEIBO(new Pair<>("weibo", "微博登录")),
     QQ(new Pair<>("qq", "QQ登录")),
@@ -51,5 +52,14 @@ public enum LoginGrantEnums implements PairEnum<String, Pair<String, String>> {
             }
         }
         return false;
+    }
+
+    public static LoginGrantEnums get(String code) {
+        for (LoginGrantEnums value : LoginGrantEnums.values()) {
+            if (value.getCode().equals(code)) {
+                return value;
+            }
+        }
+        return null;
     }
 }

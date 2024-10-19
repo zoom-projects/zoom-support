@@ -7,7 +7,6 @@ import com.alipay.sofa.runtime.api.client.param.BindingParam;
 import com.alipay.sofa.runtime.api.client.param.ServiceParam;
 import com.hb0730.zoom.base.AppUtil;
 import com.hb0730.zoom.base.utils.CollectionUtil;
-import com.hb0730.zoom.sofa.rpc.core.RpcApi;
 import com.hb0730.zoom.sofa.rpc.core.annotation.RemoteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -37,21 +36,17 @@ public class SofaRpcServiceInitializingBean implements InitializingBean {
         Set<Map.Entry<String, Object>> entries = beans.entrySet();
         for (Map.Entry<String, Object> entry : entries) {
             Object rpcApi = entry.getValue();
-            if (!rpcApi.getClass().isAssignableFrom(RpcApi.class)) {
-                log.warn("~~{}不是RPC SERVICE~~", rpcApi.getClass().getName());
-                continue;
-            }
-            log.info("~~初始化RPC SERVICE~~:{}", rpcApi.getClass().getName());
+            
+            log.info("~~初始化RPC SERVICE~~: {} ", rpcApi.getClass().getName());
             ServiceParam serviceParam = new ServiceParam();
             // 服务接口
             Class<?>[] interfaces = rpcApi.getClass().getInterfaces();
             if (interfaces.length == 0) {
-                log.warn("~~{}没有实现接口~~", rpcApi.getClass().getName());
+                log.warn("~~ {} 没有实现接口~~", rpcApi.getClass().getName());
                 continue;
             }
             serviceParam.setInterfaceType(interfaces[0]);
-
-            serviceParam.setInstance(this);
+            serviceParam.setInstance(rpcApi);
             List<BindingParam> params = new ArrayList<>();
 
             BindingParam bindingParam = new BoltBindingParam();
