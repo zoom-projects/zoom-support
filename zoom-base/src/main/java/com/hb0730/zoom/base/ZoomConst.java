@@ -54,4 +54,9 @@ public interface ZoomConst {
      * 伦理删除标志(0正常1删除)
      */
     Integer DEL_FLAG_0 = 0;
+
+    /**
+     * 登录用户权限缓存KEY前缀
+     */
+    String LOGIN_USER_CACHE_PREFIX = "user:info";
 }

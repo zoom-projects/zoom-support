@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
 
-    <artifactId>zoom-sofa-rpc</artifactId>
+    <artifactId>zoom-base-ext</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -22,15 +22,15 @@
         <dependency>
             <groupId>com.hb0730</groupId>
             <artifactId>zoom-base</artifactId>
-            <version>${zoom.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>com.alipay.sofa</groupId>
-            <artifactId>rpc-sofa-boot-starter</artifactId>
+            <groupId>com.hb0730</groupId>
+            <artifactId>zoom-cache</artifactId>
         </dependency>
-
-
+        <dependency>
+            <groupId>com.hb0730</groupId>
+            <artifactId>zoom-sofa-rpc</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

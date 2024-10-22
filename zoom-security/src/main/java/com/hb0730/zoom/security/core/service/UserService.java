@@ -1,6 +1,7 @@
 package com.hb0730.zoom.security.core.service;
 
-import com.hb0730.zoom.base.security.UserInfo;
+
+import com.hb0730.zoom.base.meta.UserInfo;
 
 /**
  * 获取用户信息

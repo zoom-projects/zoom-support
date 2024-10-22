@@ -1,6 +1,6 @@
 package com.hb0730.zoom.security.configuration;
 
-import com.hb0730.zoom.base.security.SecurityUtils;
+import com.hb0730.zoom.base.ext.security.SecurityUtils;
 import com.hb0730.zoom.security.configuration.config.SecurityConfig;
 import com.hb0730.zoom.security.core.context.TransmittableThreadLocalSecurityContextHolderStrategy;
 import com.hb0730.zoom.security.core.filter.TokenAuthenticationFilter;

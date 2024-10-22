@@ -1,7 +1,7 @@
 package com.hb0730.zoom.security.core.handler;
 
 import com.hb0730.zoom.base.R;
-import com.hb0730.zoom.base.security.SecurityUtils;
+import com.hb0730.zoom.base.ext.security.SecurityUtils;
 import com.hb0730.zoom.base.utils.JsonUtil;
 import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;

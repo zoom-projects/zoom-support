@@ -1,8 +1,9 @@
 package com.hb0730.zoom.security.core.service;
 
-import com.hb0730.zoom.base.security.SecurityHolder;
-import com.hb0730.zoom.base.security.SecurityUtils;
-import com.hb0730.zoom.base.security.UserInfo;
+
+import com.hb0730.zoom.base.ext.security.SecurityHolder;
+import com.hb0730.zoom.base.ext.security.SecurityUtils;
+import com.hb0730.zoom.base.meta.UserInfo;
 
 import java.util.Optional;
 

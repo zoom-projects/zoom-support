@@ -483,7 +483,8 @@ public class CacheUtil implements ICache {
         }
 
         public String getCacheName() {
-            return String.format("%s:%s", AppUtil.getProperty("zoom.cache.prefix", "zoom"), cacheName);
+            return cacheName;
+//            return String.format("%s:%s", AppUtil.getProperty("zoom.cache.prefix", "zoom"), cacheName);
         }
 
         /**

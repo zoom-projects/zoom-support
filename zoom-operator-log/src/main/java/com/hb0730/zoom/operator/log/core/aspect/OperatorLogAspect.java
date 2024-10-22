@@ -1,8 +1,8 @@
 package com.hb0730.zoom.operator.log.core.aspect;
 
 import cn.hutool.core.thread.ExecutorBuilder;
-import com.hb0730.zoom.base.security.SecurityHolder;
-import com.hb0730.zoom.base.security.UserInfo;
+import com.hb0730.zoom.base.ext.security.SecurityHolder;
+import com.hb0730.zoom.base.meta.UserInfo;
 import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.operator.log.core.annotation.IgnoreParameter;
 import com.hb0730.zoom.operator.log.core.annotation.OperatorLog;

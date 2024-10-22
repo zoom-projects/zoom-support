@@ -1,4 +1,6 @@
-package com.hb0730.zoom.base.security;
+package com.hb0730.zoom.base.ext.security;
+
+import com.hb0730.zoom.base.meta.UserInfo;
 
 import java.util.Optional;
 

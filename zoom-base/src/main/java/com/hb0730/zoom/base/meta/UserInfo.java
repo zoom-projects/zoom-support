@@ -1,23 +1,23 @@
-package com.hb0730.zoom.base.security;
+package com.hb0730.zoom.base.meta;
 
 import com.hb0730.zoom.base.utils.CollectionUtil;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * 登录用户信息
- *
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
- * @date 2024/9/24
+ * @date 2024/10/22
  */
-@Getter
-@Setter
-public class UserInfo implements UserDetails {
+@Data
+@EqualsAndHashCode
+@ToString
+public class UserInfo implements Serializable {
     /**
      * 用户ID
      */
@@ -59,7 +59,6 @@ public class UserInfo implements UserDetails {
      */
     private Boolean status;
 
-    @Override
     public Collection<Authority> getAuthorities() {
         List<Authority> authorities = new ArrayList<>();
         //角色+权限
@@ -74,33 +73,4 @@ public class UserInfo implements UserDetails {
         return authorities;
     }
 
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return Boolean.TRUE.equals(this.status);
-    }
 }

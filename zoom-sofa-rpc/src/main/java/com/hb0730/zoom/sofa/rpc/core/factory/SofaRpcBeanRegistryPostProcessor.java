@@ -79,7 +79,7 @@ public class SofaRpcBeanRegistryPostProcessor implements BeanDefinitionRegistryP
                 Class<?> clazz = ClassUtils.forName(metadataReader.getClassMetadata().getClassName(),
                         SofaRpcBeanRegistryPostProcessor.class.getClassLoader());
                 String appName = null;
-                if (clazz.isAssignableFrom(RpcApi.class)) {
+                if (RpcApi.class.isAssignableFrom(clazz)) {
                     appName = getRpcPkgValue(clazz);
                 }
                 if (StrUtil.isBlank(appName)) {

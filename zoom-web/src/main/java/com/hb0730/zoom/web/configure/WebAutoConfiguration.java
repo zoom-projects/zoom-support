@@ -1,12 +1,10 @@
 package com.hb0730.zoom.web.configure;
 
 import com.hb0730.zoom.base.utils.StrUtil;
-import com.hb0730.zoom.web.core.filter.TraceFilter;
 import com.hb0730.zoom.web.core.handler.GlobalExceptionHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,17 +64,5 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
         source.registerCorsConfiguration("/**", config);
         // 创建 CorsConfiguration 对象
         return source;
-    }
-
-    /**
-     * Trace 过滤器
-     */
-    @Bean
-    public FilterRegistrationBean<TraceFilter> traceFilter() {
-        FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new TraceFilter());
-        registrationBean.addUrlPatterns("/*");
-        registrationBean.setName("traceFilter");
-        return registrationBean;
     }
 }

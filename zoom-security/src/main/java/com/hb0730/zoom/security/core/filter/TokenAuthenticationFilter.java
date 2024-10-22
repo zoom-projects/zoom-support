@@ -1,8 +1,9 @@
 package com.hb0730.zoom.security.core.filter;
 
 import com.hb0730.zoom.base.R;
-import com.hb0730.zoom.base.security.SecurityUtils;
-import com.hb0730.zoom.base.security.UserInfo;
+import com.hb0730.zoom.base.ext.security.SecurityUtils;
+import com.hb0730.zoom.base.meta.UserContext;
+import com.hb0730.zoom.base.meta.UserInfo;
 import com.hb0730.zoom.base.utils.ServletUtil;
 import com.hb0730.zoom.security.core.service.UserService;
 import jakarta.servlet.FilterChain;
@@ -72,5 +73,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         }
         // 设置上下文
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        // 设置当前用户
+        UserContext.setCurrentUserName(loginUser.getUsername());
     }
 }

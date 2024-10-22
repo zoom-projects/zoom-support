@@ -2,7 +2,7 @@ package com.hb0730.zoom.operator.log.core.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hb0730.zoom.base.exception.ZoomException;
-import com.hb0730.zoom.base.security.UserInfo;
+import com.hb0730.zoom.base.meta.UserInfo;
 import com.hb0730.zoom.base.utils.MapUtil;
 import com.hb0730.zoom.operator.log.core.define.Wrapper;
 

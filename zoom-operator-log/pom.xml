@@ -38,10 +38,14 @@
             <artifactId>zoom-desensitize-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-sdk-trace</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.hb0730</groupId>
-            <artifactId>zoom-base</artifactId>
+            <artifactId>zoom-base-ext</artifactId>
         </dependency>
     </dependencies>
 </project>

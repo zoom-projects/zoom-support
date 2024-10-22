@@ -4,14 +4,14 @@ import cn.hutool.core.builder.Builder;
 import cn.hutool.core.text.StrFormatter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hb0730.zoom.base.exception.ZoomException;
-import com.hb0730.zoom.base.meta.TraceHolder;
-import com.hb0730.zoom.base.security.UserInfo;
+import com.hb0730.zoom.base.meta.UserInfo;
 import com.hb0730.zoom.base.utils.ServletUtil;
 import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.operator.log.configuration.config.OperatorLogConfig;
 import com.hb0730.zoom.operator.log.core.define.Wrapper;
 import com.hb0730.zoom.operator.log.core.enums.ReturnType;
 import com.hb0730.zoom.operator.log.core.factory.OperatorTypeHolder;
+import io.opentelemetry.api.trace.Span;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -108,7 +108,9 @@ public class OperatorLogModelBuilder implements Builder<OperatorLogModel> {
      * @return this
      */
     public OperatorLogModelBuilder fillRequest() {
-        model.setTraceId(TraceHolder.get());
+        // opentelemetry traceId
+        String traceId = Span.current().getSpanContext().getTraceId();
+        model.setTraceId(traceId);
         // 填充请求信息
         Optional
                 .ofNullable(RequestContextHolder.getRequestAttributes())

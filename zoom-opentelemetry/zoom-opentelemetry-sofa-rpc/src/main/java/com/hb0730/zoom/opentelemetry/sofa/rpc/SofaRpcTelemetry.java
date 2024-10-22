@@ -2,6 +2,7 @@ package com.hb0730.zoom.opentelemetry.sofa.rpc;
 
 import com.alipay.sofa.rpc.core.request.SofaRequest;
 import com.alipay.sofa.rpc.core.response.SofaResponse;
+import com.alipay.sofa.rpc.filter.Filter;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.instrumentation.api.instrumenter.Instrumenter;
 import lombok.Getter;
@@ -42,4 +43,13 @@ public class SofaRpcTelemetry {
         return new SofaRpcTelemetryBuilder(openTelemetry);
     }
 
+
+    /**
+     * Create a new {@link Filter} instance.
+     *
+     * @return a new {@link Filter} instance.
+     */
+    public Filter newFilter() {
+        return new TracerFilter(serverInstrumenter, clientInstrumenter);
+    }
 }

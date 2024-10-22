@@ -1,2 +1,1 @@
-clientTracerFilter=com.hb0730.zoom.opentelemetry.sofa.rpc.tracer.ClientTracerFilter
-serverTracerFilter=com.hb0730.zoom.opentelemetry.sofa.rpc.tracer.ServerTracerFilter
+opentelemetryFilter=com.hb0730.zoom.opentelemetry.sofa.rpc.OpenTelemetryFilter

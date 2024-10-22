@@ -1,8 +1,8 @@
 package com.hb0730.zoom.mybatis.core.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.hb0730.zoom.base.security.SecurityUtils;
-import com.hb0730.zoom.base.security.UserInfo;
+import com.hb0730.zoom.base.ext.security.SecurityUtils;
+import com.hb0730.zoom.base.meta.UserInfo;
 import org.apache.ibatis.reflection.MetaObject;
 
 import java.util.Date;

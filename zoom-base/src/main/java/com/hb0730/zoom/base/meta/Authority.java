@@ -1,4 +1,4 @@
-package com.hb0730.zoom.base.security;
+package com.hb0730.zoom.base.meta;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
- * @date 2024/10/15
+ * @date 2024/10/22
  */
 @Data
 @NoArgsConstructor
@@ -17,6 +17,6 @@ public class Authority implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return authority;
+        return this.authority;
     }
 }
