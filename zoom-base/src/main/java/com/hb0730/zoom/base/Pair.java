@@ -41,4 +41,17 @@ public class Pair<K, V> implements Serializable {
         this.code = code;
         this.message = message;
     }
+
+    /**
+     * 创建处理结果详细信息
+     *
+     * @param code    处理结果代码
+     * @param message 处理结果消息
+     * @param <K>     处理结果代码
+     * @param <V>     处理结果消息
+     * @return 处理结果详细信息
+     */
+    public static <K, V> Pair<K, V> of(K code, V message) {
+        return new Pair<>(code, message);
+    }
 }

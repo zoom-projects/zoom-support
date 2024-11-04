@@ -16,4 +16,13 @@ public interface SysUserRpcService {
      * @return 用户信息
      */
     UserInfoDTO findUsername(String username);
+
+    /**
+     * 检查openApi权限
+     *
+     * @param token   token
+     * @param apiName api名称
+     * @return 是否有权限
+     */
+    boolean checkOpenApiAuth(String token, String apiName);
 }

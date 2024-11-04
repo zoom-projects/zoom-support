@@ -12,6 +12,23 @@ import java.util.Date;
  * @date 2024/9/23
  */
 public class DateUtil extends cn.hutool.core.date.DateUtil {
+
+    /**
+     * 判断字符串是否是日期
+     *
+     * @param value  字符串
+     * @param format 格式
+     * @return .
+     */
+    public static boolean isValidateDate(String value, String format) {
+        try {
+            cn.hutool.core.date.DateUtil.parse(value, format);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     /**
      * 字符串转日期,默认格式: yyyy-MM-dd
      *

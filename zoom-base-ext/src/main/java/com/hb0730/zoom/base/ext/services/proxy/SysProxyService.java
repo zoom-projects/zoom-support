@@ -40,4 +40,9 @@ public class SysProxyService implements SysUserRpcService, SysNotifyRpcService {
         return userRpcService.findUsername(username);
     }
 
+    @Override
+    public boolean checkOpenApiAuth(String token, String apiName) {
+        return userRpcService.checkOpenApiAuth(token, apiName);
+    }
+
 }

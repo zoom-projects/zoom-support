@@ -41,6 +41,11 @@ public class PageRequest implements Serializable {
     @Schema(description = "排序字段,格式 filed1 asc,field2 desc")
     private String sorts;
 
+    @JsonIgnore
+    public String getSortsStr() {
+        return sorts;
+    }
+
     /**
      * 获取排序
      *

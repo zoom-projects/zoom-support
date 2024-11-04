@@ -141,4 +141,25 @@ public class DataQuery<T> {
     public Optional<T> oneOptional() {
         return Optional.ofNullable(one());
     }
+
+    // -------------------- remove --------------------
+
+    /**
+     * 删除
+     *
+     * @return 是否成功
+     */
+    public boolean remove() {
+        return mapper.delete(wrapper) > 0;
+    }
+
+    /**
+     * 删除
+     *
+     * @param wrapper 条件
+     * @return 是否成功
+     */
+    public boolean remove(Wrapper<T> wrapper) {
+        return mapper.delete(wrapper) > 0;
+    }
 }

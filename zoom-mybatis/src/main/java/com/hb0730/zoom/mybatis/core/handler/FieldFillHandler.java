@@ -28,16 +28,18 @@ public class FieldFillHandler implements MetaObjectHandler {
     private void fill(MetaObject metaObject) {
         Date date = new Date();
         UserInfo userInfo = SecurityUtils.getLoginUser().orElse(new UserInfo());
-        if (metaObject.hasSetter("created")) {
+        Object _value = getFieldValByName("created", metaObject);
+        if (metaObject.hasSetter("created") && _value == null) {
             setFieldValByName("created", date, metaObject);
         }
-        if (metaObject.hasSetter("createdBy")) {
+        _value = getFieldValByName("createdBy", metaObject);
+        if (metaObject.hasSetter("createdBy") && _value == null) {
             setFieldValByName("createdBy", userInfo.getUsername(), metaObject);
         }
-        if (metaObject.hasSetter("modified")) {
+        if (metaObject.hasSetter("modified") && _value == null) {
             setFieldValByName("modified", date, metaObject);
         }
-        if (metaObject.hasSetter("modifiedBy")) {
+        if (metaObject.hasSetter("modifiedBy") && _value == null) {
             setFieldValByName("modifiedBy", userInfo.getUsername(), metaObject);
         }
 
