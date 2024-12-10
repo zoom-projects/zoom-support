@@ -388,6 +388,15 @@ public class CacheUtil implements ICache {
     }
 
     @Override
+    public List<String> randomMembers(String key, int size) {
+        String _key = normalizeKey(key);
+        if (StrUtil.isBlank(_key)) {
+            return CollectionUtil.newArrayList();
+        }
+        return cache.randomMembers(_key, size);
+    }
+
+    @Override
     public Optional<List<String>> lGet(String key, long start, long end) {
         String _key = normalizeKey(key);
         if (StrUtil.isBlank(_key)) {

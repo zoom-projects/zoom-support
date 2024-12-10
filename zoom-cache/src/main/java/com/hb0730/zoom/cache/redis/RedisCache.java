@@ -247,6 +247,7 @@ public class RedisCache implements ICache {
         return res == null ? 0 : res;
     }
 
+
     @Override
     public Optional<String> hGet(String key, String field) {
         Object value = redisTemplate.opsForHash().get(key, field);
@@ -380,6 +381,20 @@ public class RedisCache implements ICache {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return 0;
+        }
+    }
+
+    @Override
+    public List<String> randomMembers(String key, int size) {
+        try {
+            Set<Object> members = redisTemplate.opsForSet().distinctRandomMembers(key, size);
+            if (CollectionUtil.isEmpty(members)) {
+                return new ArrayList<>();
+            }
+            return members.stream().map(e -> Convert.toStr(e, "")).collect(Collectors.toList());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return new ArrayList<>();
         }
     }
 

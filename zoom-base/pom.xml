@@ -73,6 +73,11 @@
             <artifactId>transmittable-thread-local</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-api</artifactId>
+        </dependency>
+
         <!--jupiter-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

@@ -59,4 +59,14 @@ public interface ZoomConst {
      * 登录用户权限缓存KEY前缀
      */
     String LOGIN_USER_CACHE_PREFIX = "user:info";
+    /**
+     * 字典项缓存KEY前缀
+     */
+    String DICT_ITEMS_KEY = "sys:dict:items";
+
+
+    /**
+     * 字典-语录类型
+     */
+    String DICT_GOROKU_TYPE = "gorokuType";
 }

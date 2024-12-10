@@ -1,4 +1,4 @@
-package com.hb0730.zoom.operator.log.core.enums;
+package com.hb0730.zoom.base.enums;
 
 import lombok.Getter;
 
@@ -9,7 +9,7 @@ import lombok.Getter;
  * @date 2024/10/9
  */
 @Getter
-public enum OperatorRiskLevel {
+public enum OperatorRiskLevelEnums {
     /**
      * 低风险
      */

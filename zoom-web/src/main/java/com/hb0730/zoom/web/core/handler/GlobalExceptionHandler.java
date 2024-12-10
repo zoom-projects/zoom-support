@@ -34,6 +34,12 @@ public class GlobalExceptionHandler {
         return R.NG("资源不存在" + e.getMessage());
     }
 
+    @ExceptionHandler(jakarta.validation.ConstraintViolationException.class)
+    public R<?> handleConstraintViolationException(Exception e) {
+        log.error("ConstraintViolationException", e);
+        return R.NG("参数校验失败" + e.getMessage());
+    }
+
     /**
      * ZoomException 异常处理
      *

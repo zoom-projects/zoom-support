@@ -47,6 +47,11 @@ public abstract class AbstractApiService implements Api {
         return false;
     }
 
+    @Override
+    public ApiDescription description() {
+        return null;
+    }
+
     /**
      * 执行业务
      *

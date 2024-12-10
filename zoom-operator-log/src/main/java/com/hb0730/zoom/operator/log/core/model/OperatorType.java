@@ -1,6 +1,6 @@
 package com.hb0730.zoom.operator.log.core.model;
 
-import com.hb0730.zoom.operator.log.core.enums.OperatorRiskLevel;
+import com.hb0730.zoom.base.enums.OperatorRiskLevelEnums;
 import lombok.Getter;
 
 /**
@@ -16,7 +16,7 @@ public class OperatorType {
     /**
      * 风险等级
      */
-    private final OperatorRiskLevel riskLevel;
+    private final OperatorRiskLevelEnums riskLevel;
 
     /**
      * 模块
@@ -33,11 +33,11 @@ public class OperatorType {
      */
     private final String template;
 
-    public OperatorType(OperatorRiskLevel riskLevel, String type, String template) {
+    public OperatorType(OperatorRiskLevelEnums riskLevel, String type, String template) {
         this(riskLevel, null, type, template);
     }
 
-    public OperatorType(OperatorRiskLevel riskLevel, String module, String type, String template) {
+    public OperatorType(OperatorRiskLevelEnums riskLevel, String module, String type, String template) {
         this.riskLevel = riskLevel;
         this.module = module;
         this.type = type;

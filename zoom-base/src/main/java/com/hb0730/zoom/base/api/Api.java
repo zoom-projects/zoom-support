@@ -25,4 +25,11 @@ public interface Api {
      * @return 是否跳过
      */
     boolean isSkipAuth();
+
+    /**
+     * API描述
+     *
+     * @return 描述
+     */
+    ApiDescription description();
 }

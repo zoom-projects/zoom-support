@@ -1,5 +1,6 @@
 package com.hb0730.zoom.base.ext.services.remote;
 
+import com.hb0730.zoom.base.ext.services.dto.UserDTO;
 import com.hb0730.zoom.base.ext.services.dto.UserInfoDTO;
 import com.hb0730.zoom.sofa.rpc.core.annotation.RpcAppName;
 
@@ -25,4 +26,12 @@ public interface SysUserRpcService {
      * @return 是否有权限
      */
     boolean checkOpenApiAuth(String token, String apiName);
+
+    /**
+     * 根据token查询用户信息
+     *
+     * @param token token
+     * @return 用户信息
+     */
+    UserDTO findUserByToken(String token);
 }

@@ -311,6 +311,7 @@ public interface ICache {
      */
     long decr(String key, long delta);
 
+
     /*==========================Map==============================*/
 
     /**
@@ -524,6 +525,35 @@ public interface ICache {
     }
 
     /**
+     * 将set数据放入缓存
+     *
+     * @param key     键
+     * @param values  值
+     * @param timeout 过期时间
+     * @param unit    时间单位
+     * @return .
+     */
+    default long sSet(String key, Set<String> values, long timeout, TimeUnit unit) {
+        long count = sSet(key, values.toArray(new String[0]));
+        if (count > 0) {
+            expire(key, timeout, unit);
+        }
+        return count;
+    }
+
+    /**
+     * 将set数据放入缓存
+     *
+     * @param key     键
+     * @param values  值
+     * @param timeout 过期时间 单位秒
+     * @return .
+     */
+    default long sSet(String key, Set<String> values, long timeout) {
+        return sSet(key, values, timeout, TimeUnit.SECONDS);
+    }
+
+    /**
      * 获取set缓存的长度
      *
      * @param key 键
@@ -539,6 +569,26 @@ public interface ICache {
      * @return .
      */
     long sRemove(String key, String... values);
+
+
+    /**
+     * 随机获取
+     *
+     * @param key  key
+     * @param size 大小
+     * @return .
+     */
+    List<String> randomMembers(String key, int size);
+
+    /**
+     * 随机获取一个值
+     *
+     * @param key key
+     * @return .
+     */
+    default List<String> randomMembers(String key) {
+        return randomMembers(key, 1);
+    }
 
     /*==========================list==============================*/
 

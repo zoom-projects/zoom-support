@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "zoom.opentelemetry.sofa.rpc.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否开启sofa rpc追踪.",
+      "defaultValue": "true"
+    }
+  ]
+}
