@@ -39,7 +39,7 @@ public abstract class AbstractApiService implements Api {
             ), invalidParams);
         }
 
-        return doExecute(params);
+        return doExecute(token, params);
     }
 
     @Override
@@ -55,10 +55,11 @@ public abstract class AbstractApiService implements Api {
     /**
      * 执行业务
      *
+     * @param token  访问令牌
      * @param params 参数
      * @return 结果
      */
-    protected abstract R<?> doExecute(Map<String, Object> params);
+    protected abstract R<?> doExecute(String token, Map<String, Object> params);
 
     /**
      * 参数基本要求

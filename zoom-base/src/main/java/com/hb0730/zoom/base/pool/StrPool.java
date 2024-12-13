@@ -1,9 +1,22 @@
 package com.hb0730.zoom.base.pool;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 /**
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/10/14
  */
 public interface StrPool extends cn.hutool.core.text.StrPool {
+
     static String EQUALS = "=";
+
+    /**
+     * utf-8
+     */
+    Charset CHARSET_UTF_8 = StandardCharsets.UTF_8;
+    /**
+     * utf-8
+     */
+    String UTF_8 = "UTF-8";
 }

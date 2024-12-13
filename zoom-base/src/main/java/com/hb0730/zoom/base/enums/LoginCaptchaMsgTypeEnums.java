@@ -40,11 +40,11 @@ public enum LoginCaptchaMsgTypeEnums implements PairEnum<String, Pair<String, St
      *
      * @return 消息类型
      */
-    public MessageType getMsgType() {
+    public MessageTypeEnums getMsgType() {
         if (SMS.equals(this)) {
-            return MessageType.SMS;
+            return MessageTypeEnums.SMS;
         } else if (EMAIL.equals(this)) {
-            return MessageType.EMAIL;
+            return MessageTypeEnums.EMAIL;
         }
         throw new ZoomException("不支持的消息类型");
     }

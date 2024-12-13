@@ -1,8 +1,7 @@
-package com.hb0730.zoom.mail.config;
+package com.hb0730.zoom.mail.configuration.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 邮件配置
@@ -12,9 +11,8 @@ import org.springframework.context.annotation.Configuration;
  * @link <a href="https://github.com/jakartaee/mail-api">mail-api</a>
  * @date 2024/12/11
  */
-@Configuration
-@ConfigurationProperties(prefix = "zoom.mail")
 @Data
+@ConfigurationProperties(prefix = "zoom.mail")
 public class MailProperties {
     /**
      * 是否启用
@@ -31,7 +29,7 @@ public class MailProperties {
     /**
      * SMTP服务端口,默认25,SSL为465
      */
-    private int port = 25;
+    private int port = 465;
     /**
      * 发送方，遵循RFC-822标准"Personal Name &lt;user@host.domain&gt;"
      */
@@ -52,12 +50,12 @@ public class MailProperties {
     /**
      * SMTP超时时长，单位毫秒，缺省值不超时
      */
-    private Long timeout;
+    private Long timeout = 0L;
 
     /**
      * Socket连接超时值，单位毫秒，缺省值不超时
      */
-    private Long connectionTimeout;
+    private Long connectionTimeout = 0L;
 
 
     /**

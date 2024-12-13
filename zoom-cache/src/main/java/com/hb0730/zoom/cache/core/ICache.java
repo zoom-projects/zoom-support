@@ -534,7 +534,8 @@ public interface ICache {
      * @return .
      */
     default long sSet(String key, Set<String> values, long timeout, TimeUnit unit) {
-        long count = sSet(key, values.toArray(new String[0]));
+        String[] _values = values.toArray(new String[0]);
+        long count = sSet(key, _values);
         if (count > 0) {
             expire(key, timeout, unit);
         }

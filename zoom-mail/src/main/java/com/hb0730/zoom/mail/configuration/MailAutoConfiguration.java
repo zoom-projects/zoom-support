@@ -1,5 +1,6 @@
-package com.hb0730.zoom.mail.config;
+package com.hb0730.zoom.mail.configuration;
 
+import com.hb0730.zoom.mail.configuration.config.MailProperties;
 import com.hb0730.zoom.mail.core.GlobalMailAccount;
 import com.hb0730.zoom.mail.core.MailAccount;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -22,7 +23,7 @@ public class MailAutoConfiguration {
      * @param mailProperties 邮件配置
      * @return 邮件账户
      */
-    @ConditionalOnProperty(prefix = "zoom.mail", value = "enable", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "zoom.mail", name = "enable", havingValue = "true", matchIfMissing = true)
     @Bean
     public MailAccount mailAccount(MailProperties mailProperties) {
         MailAccount mailAccount = new MailAccount();
@@ -44,6 +45,7 @@ public class MailAutoConfiguration {
         mailAccount.setTimeout(mailProperties.getTimeout());
         // 设置连接超时
         mailAccount.setConnectionTimeout(mailProperties.getConnectionTimeout());
+        mailAccount = mailAccount.defaultIfEmpty();
         // 设置全局邮件账户
         GlobalMailAccount.INSTANCE.setAccount(mailAccount);
         return mailAccount;

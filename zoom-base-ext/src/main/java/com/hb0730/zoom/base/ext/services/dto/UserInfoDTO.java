@@ -41,4 +41,8 @@ public class UserInfoDTO implements Serializable {
      * 手机号
      */
     private String phone;
+    /**
+     * 是否开启消息通知
+     */
+    private Boolean messageNotification;
 }

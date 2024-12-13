@@ -91,6 +91,9 @@ public class RedisCache implements ICache {
     @Override
     public boolean expire(String key, long expire) {
         try {
+            if (expire <= 0) {
+                return Boolean.TRUE.equals(redisTemplate.persist(key));
+            }
             Boolean res = redisTemplate.expire(key, expire, TimeUnit.SECONDS);
             return Boolean.TRUE.equals(res);
         } catch (Exception e) {
@@ -118,6 +121,10 @@ public class RedisCache implements ICache {
     @Override
     public boolean setObject(String key, Object value, long expire, TimeUnit timeUnit) {
         try {
+            if (expire <= 0) {
+                redisTemplate.opsForValue().set(key, value);
+                return true;
+            }
             redisTemplate.opsForValue().set(key, value, expire, timeUnit);
             return true;
         } catch (Exception e) {
@@ -141,6 +148,9 @@ public class RedisCache implements ICache {
     @Override
     public boolean setObjectIfAbsent(String key, Object value, long expire, TimeUnit timeUnit) {
         try {
+            if (expire <= 0) {
+                return setObjectIfAbsent(key, value);
+            }
             Boolean res = redisTemplate.opsForValue().setIfAbsent(key, value, expire, timeUnit);
             return Boolean.TRUE.equals(res);
         } catch (Exception e) {
@@ -165,6 +175,10 @@ public class RedisCache implements ICache {
     public boolean setJson(String key, Object value, long expire, TimeUnit timeUnit) {
         try {
             String _value = JsonUtil.DEFAULT.toJson(value);
+            if (expire <= 0) {
+                redisTemplate.opsForValue().set(key, _value);
+                return true;
+            }
             redisTemplate.opsForValue().set(key, _value, expire, timeUnit);
             return true;
         } catch (Exception e) {
@@ -202,6 +216,9 @@ public class RedisCache implements ICache {
     @Override
     public boolean setString(String key, String value, long expire, TimeUnit timeUnit) {
         try {
+            if (expire <= 0) {
+                redisTemplate.opsForValue().set(key, value);
+            }
             redisTemplate.opsForValue().set(key, value, expire, timeUnit);
             return true;
         } catch (Exception e) {
@@ -225,6 +242,9 @@ public class RedisCache implements ICache {
     @Override
     public boolean setStringIfAbsent(String key, String value, long expire, TimeUnit timeUnit) {
         try {
+            if (expire <= 0) {
+                return setStringIfAbsent(key, value);
+            }
             Boolean res = redisTemplate.opsForValue().setIfAbsent(key, value, expire, timeUnit);
             return Boolean.TRUE.equals(res);
         } catch (Exception e) {
