@@ -10,8 +10,7 @@
         <relativePath/>
     </parent>
 
-    <artifactId>zoom-cache</artifactId>
-    <description>zoom cache提供统一的缓存工具</description>
+    <artifactId>zoom-social</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -21,30 +20,24 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>me.zhyd.oauth</groupId>
+            <artifactId>JustAuth</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure-processor</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-metadata</artifactId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.hb0730</groupId>
-            <artifactId>zoom-base</artifactId>
+            <artifactId>zoom-cache</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>

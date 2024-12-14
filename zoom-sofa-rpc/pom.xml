@@ -22,7 +22,6 @@
         <dependency>
             <groupId>com.hb0730</groupId>
             <artifactId>zoom-base</artifactId>
-            <version>${zoom.version}</version>
         </dependency>
 
         <dependency>

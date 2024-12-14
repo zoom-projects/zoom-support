@@ -33,6 +33,7 @@
         <alibaba-ttl.version>2.13.0</alibaba-ttl.version>
         <commons-text.version>1.9</commons-text.version>
         <angus-mail.version>2.0.3</angus-mail.version>
+        <justauth.version>1.16.6</justauth.version>
 
         <slf4j.version>2.0.6</slf4j.version>
     </properties>
@@ -189,6 +190,12 @@
                 <version>${angus-mail.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${justauth.version}</version>
+            </dependency>
+
 
             <!--zoom-->
             <dependency>
@@ -272,6 +279,11 @@
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-opentelemetry-configuration</artifactId>
+                <version>${zoom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hb0730</groupId>
+                <artifactId>zoom-social</artifactId>
                 <version>${zoom.version}</version>
             </dependency>
         </dependencies>
