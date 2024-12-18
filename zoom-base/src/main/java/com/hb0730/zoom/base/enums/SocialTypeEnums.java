@@ -10,7 +10,8 @@ import com.hb0730.zoom.base.PairEnum;
  * @date 2024/12/14
  */
 public enum SocialTypeEnums implements PairEnum<String, Pair<String, String>> {
-    GITHUB(new Pair<>("GITHUB", "github登陆")),
+    GITHUB(new Pair<>("github", "github登陆")),
+    GITEE(new Pair<>("gitee", "gitee登陆")),
     ;
     private final Pair<String, String> status;
 

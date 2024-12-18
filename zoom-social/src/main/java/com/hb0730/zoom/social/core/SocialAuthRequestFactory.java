@@ -8,10 +8,12 @@ import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
+import me.zhyd.oauth.request.AuthGiteeRequest;
 import me.zhyd.oauth.request.AuthGithubRequest;
 import me.zhyd.oauth.request.AuthRequest;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * AuthRequest工厂类
@@ -20,7 +22,7 @@ import java.util.Map;
  * @date 2024/12/14
  */
 @RequiredArgsConstructor
-public class AuthRequestFactory {
+public class SocialAuthRequestFactory {
     private final AuthStateCache authStateCache;
     private final SocialConfig socialConfig;
     private static final Map<String, AuthRequest> AUTH_REQUEST_CACHE = new java.util.concurrent.ConcurrentHashMap<>();
@@ -36,11 +38,18 @@ public class AuthRequestFactory {
      */
     @SuppressWarnings("unchecked")
     public AuthResponse<AuthUser> loginAuth(String source, String code, String state) {
-        AuthRequest authRequest = get(source);
+        Optional<AuthRequest> authRequest = get(source);
+        if (authRequest.isEmpty()) {
+            return AuthResponse.<AuthUser>builder()
+                    .code(-1)
+                    .msg("不支持的登录方式")
+                    .build();
+        }
+
         AuthCallback callback = new AuthCallback();
         callback.setCode(code);
         callback.setState(state);
-        return authRequest.login(callback);
+        return authRequest.get().login(callback);
 
     }
 
@@ -50,7 +59,7 @@ public class AuthRequestFactory {
      * @param source 类型
      * @return AuthRequest
      */
-    public AuthRequest get(String source) {
+    public Optional<AuthRequest> get(String source) {
         // 双重锁
         AuthRequest authRequest = AUTH_REQUEST_CACHE.get(source);
         if (null == authRequest) {
@@ -62,7 +71,7 @@ public class AuthRequestFactory {
                 }
             }
         }
-        return authRequest;
+        return Optional.ofNullable(authRequest);
     }
 
     /**
@@ -74,7 +83,7 @@ public class AuthRequestFactory {
     private AuthRequest getDefaultRequest(String source) {
         SocialConfigProperties properties = socialConfig.getResources().get(source);
         if (null == properties) {
-            throw new IllegalArgumentException("不支持的第三方登录类型： " + source);
+            return null;
         }
         AuthConfig.AuthConfigBuilder builder = AuthConfig.builder()
                 .clientId(properties.getClientId())
@@ -82,12 +91,11 @@ public class AuthRequestFactory {
                 .redirectUri(properties.getRedirectUri())
                 .scopes(properties.getScopes());
 
-        switch (source.toUpperCase()) {
-            case "GITHUB":
-                return new AuthGithubRequest(builder.build(), authStateCache);
-            default:
-                throw new IllegalArgumentException("不支持的第三方登录类型： " + source);
-        }
+        return switch (source.toUpperCase()) {
+            case "GITHUB" -> new AuthGithubRequest(builder.build(), authStateCache);
+            case "GITEE" -> new AuthGiteeRequest(builder.build(), authStateCache);
+            default -> null;
+        };
 
     }
 }

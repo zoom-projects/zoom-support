@@ -2,7 +2,7 @@ package com.hb0730.zoom.social.configure;
 
 import com.hb0730.zoom.cache.core.CacheUtil;
 import com.hb0730.zoom.social.configure.config.SocialConfig;
-import com.hb0730.zoom.social.core.AuthRequestFactory;
+import com.hb0730.zoom.social.core.SocialAuthRequestFactory;
 import com.hb0730.zoom.social.core.cache.AuthRedisStateCache;
 import me.zhyd.oauth.cache.AuthStateCache;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -30,12 +30,12 @@ public class SocialAutoConfiguration {
      *
      * @param authCache    授权缓存
      * @param socialConfig 社交配置
-     * @return {@link AuthRequestFactory}
+     * @return {@link SocialAuthRequestFactory}
      */
     @Bean
-    @ConditionalOnBean({AuthStateCache.class, SocialConfig.class})
+    @ConditionalOnBean(AuthStateCache.class)
     @ConditionalOnProperty(prefix = "zoom.social", name = "enable", havingValue = "true", matchIfMissing = true)
-    public AuthRequestFactory authRequestFactory(AuthStateCache authCache, SocialConfig socialConfig) {
-        return new AuthRequestFactory(authCache, socialConfig);
+    public SocialAuthRequestFactory authRequestFactory(AuthStateCache authCache, SocialConfig socialConfig) {
+        return new SocialAuthRequestFactory(authCache, socialConfig);
     }
 }
