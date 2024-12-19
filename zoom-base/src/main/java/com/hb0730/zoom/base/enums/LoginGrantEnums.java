@@ -13,6 +13,7 @@ public enum LoginGrantEnums implements PairEnum<String, Pair<String, String>> {
     PASSWORD(new Pair<>("password", "账号(身份证,邮箱,用户名)密码登录")),
     MOBILE(new Pair<>("mobile", "手机号登录")),
     EMAIL(new Pair<>("email", "邮箱登录")),
+    CODE(new Pair<>("code", "验证码登录")),
     SOCIAL(new Pair<>("social", "社交登录")),
     ;
 
