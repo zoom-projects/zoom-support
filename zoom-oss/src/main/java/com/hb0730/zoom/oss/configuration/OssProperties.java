@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date 2024/5/8
  */
 @Data
-@ConfigurationProperties(prefix = "boot.admin.oss")
+@ConfigurationProperties(prefix = "zoom.oss")
 public class OssProperties {
     /**
      * 是否启用

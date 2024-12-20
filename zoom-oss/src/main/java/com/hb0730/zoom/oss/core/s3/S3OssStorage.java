@@ -281,7 +281,7 @@ public class S3OssStorage extends AbstractOssStorage {
     private S3Client buildClient() {
         return S3Client.builder()
                 .endpointOverride(
-                        URI.create(ossProperties.getEndpointProtocol() + "://" + ossProperties.getEndpoint())
+                        URI.create(getEndpoint())
                 )
                 .region(
                         Region.of(ossProperties.getRegion())
@@ -297,7 +297,7 @@ public class S3OssStorage extends AbstractOssStorage {
     private S3Presigner buildS3Presigner() {
         return S3Presigner.builder()
                 .endpointOverride(
-                        URI.create(ossProperties.getEndpointProtocol() + "://" + ossProperties.getEndpoint())
+                        URI.create(getEndpoint())
                 )
                 .region(Region.of(ossProperties.getRegion()))
                 .credentialsProvider(
@@ -320,6 +320,15 @@ public class S3OssStorage extends AbstractOssStorage {
                         () -> AwsBasicCredentials.create(ossProperties.getAccessKey(), ossProperties.getSecretKey())
                 )
                 .build();
+    }
+
+
+    private String getEndpoint() {
+        String _endpoint = ossProperties.getEndpoint();
+        if (_endpoint.startsWith("http://") || _endpoint.startsWith("https://")) {
+            return _endpoint;
+        }
+        return ossProperties.getEndpointProtocol() + "://" + _endpoint;
     }
 
 

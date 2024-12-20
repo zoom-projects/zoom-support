@@ -15,12 +15,12 @@ import org.springframework.context.annotation.Configuration;
  * @date 2024/5/8
  */
 @Configuration
-@ConditionalOnProperty(prefix = "boot.admin.oss", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "zoom.oss", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({OssProperties.class})
 public class OssAutoConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "boot.admin.oss", name = "type", havingValue = "s3")
+    @ConditionalOnProperty(prefix = "zoom.oss", name = "type", havingValue = "s3")
     @ConditionalOnMissingBean
     public OssStorage s3OssStorage(OssProperties properties) {
         S3OssProperties s3 = properties.getS3();
