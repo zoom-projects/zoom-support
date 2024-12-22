@@ -34,7 +34,7 @@
         <commons-text.version>1.9</commons-text.version>
         <angus-mail.version>2.0.3</angus-mail.version>
         <justauth.version>1.16.6</justauth.version>
-        <jsoup.version>1.11.3</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <nacos-client.version>2.4.3</nacos-client.version>
 
         <slf4j.version>2.0.6</slf4j.version>
