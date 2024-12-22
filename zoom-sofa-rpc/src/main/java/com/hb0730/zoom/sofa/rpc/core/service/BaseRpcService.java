@@ -4,6 +4,7 @@ import com.alipay.sofa.rpc.boot.runtime.param.BoltBindingParam;
 import com.alipay.sofa.runtime.api.client.ReferenceClient;
 import com.alipay.sofa.runtime.api.client.param.ReferenceParam;
 import com.hb0730.zoom.base.AppUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.sofa.rpc.core.config.ConfigManager;
 import com.hb0730.zoom.sofa.rpc.core.config.RpcConfigProperties;
 import com.hb0730.zoom.sofa.rpc.core.factory.SofaRpcClientFactoryBean;
@@ -53,12 +54,12 @@ public abstract class BaseRpcService<T> implements IRpcService {
     protected abstract String getAppName();
 
     /**
-     * 服务地址
+     * 获取服务配置
      *
-     * @return 服务地址
+     * @return .
      */
-    protected String getRpcServer() {
-        return getRpcServer(getAppName());
+    protected RpcConfigProperties getRpcServerConfig() {
+        return getRpcConfig(getAppName());
     }
 
     /**
@@ -67,9 +68,8 @@ public abstract class BaseRpcService<T> implements IRpcService {
      * @param which 服务名称
      * @return 服务地址
      */
-    protected String getRpcServer(String which) {
-        RpcConfigProperties rpcConfig = getRpcConfig(which);
-        return rpcConfig.getAddress();
+    protected RpcConfigProperties getRpcServerConfig(String which) {
+        return getRpcConfig(which);
     }
 
     /**
@@ -78,7 +78,7 @@ public abstract class BaseRpcService<T> implements IRpcService {
      * @param which 服务名称
      * @return rpc配置
      */
-    private RpcConfigProperties getRpcConfig(String which) {
+    protected RpcConfigProperties getRpcConfig(String which) {
         return ConfigManager.getConfig(which);
     }
 
@@ -90,7 +90,7 @@ public abstract class BaseRpcService<T> implements IRpcService {
      */
     public T getRpcService(String which) {
         String appName = getAppName(which);
-        String server = getRpcServer(appName);
+        RpcConfigProperties server = getRpcServerConfig(appName);
         return this.getRpcService(server, this.getRpcInterfaceClazz());
     }
 
@@ -103,7 +103,7 @@ public abstract class BaseRpcService<T> implements IRpcService {
     public <V> V getRpcService(Class<V> clazz) {
         T RpcService = RPC_SERVER_CACHE.get(clazz.getName());
         if (null == RpcService) {
-            RpcService = getRpcService(getRpcServer(), (Class<T>) clazz);
+            RpcService = getRpcService(getRpcServerConfig(), (Class<T>) clazz);
             RPC_SERVER_CACHE.put(clazz.getName(), RpcService);
         }
         return (V) RpcService;
@@ -112,11 +112,11 @@ public abstract class BaseRpcService<T> implements IRpcService {
     /**
      * 根据接口类型取得RPC接口
      *
-     * @param server 服务地址
-     * @param clazz  接口类型
+     * @param serverConfig 服务配置
+     * @param clazz        接口类型
      * @return RPC接口
      */
-    protected T getRpcService(String server, Class<T> clazz) {
+    protected T getRpcService(RpcConfigProperties serverConfig, Class<T> clazz) {
         SofaRpcClientFactoryBean clientFactoryBean = AppUtil.getBean(SofaRpcClientFactoryBean.class);
         ReferenceClient referenceClient = clientFactoryBean.getClientFactory().getClient(ReferenceClient.class);
         ReferenceParam<T> referenceParam = new ReferenceParam<>();
@@ -125,9 +125,12 @@ public abstract class BaseRpcService<T> implements IRpcService {
         //Bolt协议
         BoltBindingParam bindingParam = new BoltBindingParam();
         // 设置服务地址 直连模式
-        if (null != server) {
-            bindingParam.setTargetUrl(server);
+        String address = serverConfig.getAddress();
+        if (StrUtil.isNotBlank(address)) {
+            bindingParam.setTargetUrl(address);
         }
+        //TODO:注册中心 采用Spring方式即可
+
         referenceParam.setBindingParam(bindingParam);
         return referenceClient.reference(referenceParam);
     }

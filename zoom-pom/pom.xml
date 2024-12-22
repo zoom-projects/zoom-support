@@ -35,6 +35,7 @@
         <angus-mail.version>2.0.3</angus-mail.version>
         <justauth.version>1.16.6</justauth.version>
         <jsoup.version>1.11.3</jsoup.version>
+        <nacos-client.version>2.4.3</nacos-client.version>
 
         <slf4j.version>2.0.6</slf4j.version>
     </properties>
@@ -201,6 +202,17 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-api</artifactId>
+                <version>${nacos-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos-client.version}</version>
             </dependency>
 
             <!--zoom-->
