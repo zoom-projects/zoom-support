@@ -2,7 +2,6 @@ package com.hb0730.zoom.operator.log.core.factory;
 
 import com.hb0730.zoom.operator.log.core.annotation.OperatorModule;
 import com.hb0730.zoom.operator.log.core.model.OperatorType;
-import jakarta.annotation.PostConstruct;
 
 /**
  * 操作类型初始化器
@@ -13,11 +12,8 @@ import jakarta.annotation.PostConstruct;
 public abstract class InitializingOperatorTypes implements OperatorTypeDefinition {
 
 
-    /**
-     * 初始化
-     */
-    @PostConstruct
-    public void init() {
+    @Override
+    public void afterPropertiesSet() throws Exception {
         OperatorModule moduleDefinition = this.getClass().getAnnotation(OperatorModule.class);
         if (null == moduleDefinition) {
             return;
