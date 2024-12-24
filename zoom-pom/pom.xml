@@ -31,7 +31,7 @@
         <guava.version>31.0.1-jre</guava.version>
         <aws-s3.version>2.25.27</aws-s3.version>
         <alibaba-ttl.version>2.13.0</alibaba-ttl.version>
-        <commons-text.version>1.9</commons-text.version>
+        <commons-text.version>1.10.0</commons-text.version>
         <angus-mail.version>2.0.3</angus-mail.version>
         <justauth.version>1.16.6</justauth.version>
         <jsoup.version>1.11.3</jsoup.version>
