@@ -43,7 +43,7 @@ public enum MessageTypeEnums implements PairEnum<String, Pair<String, String>> {
      */
     public static MessageTypeEnums of(String code) {
         for (MessageTypeEnums value : MessageTypeEnums.values()) {
-            if (value.getCode().equals(code)) {
+            if (value.getCode().equals(code.toUpperCase())) {
                 return value;
             }
         }

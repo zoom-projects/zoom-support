@@ -1,5 +1,6 @@
 package com.hb0730.zoom.base.ext.services.dto;
 
+import com.hb0730.zoom.base.enums.MessageTypeEnums;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,6 +21,18 @@ public class SaveMessageDTO implements Serializable {
      * 消息内容
      */
     private String msgType;
+
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
+    }
+
+    public void setMsgType(MessageTypeEnums msgType) {
+        if (msgType == null) {
+            return;
+        }
+        this.msgType = msgType.getCode();
+    }
+
     /**
      * 消息标题
      */
