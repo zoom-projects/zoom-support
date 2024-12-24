@@ -33,7 +33,7 @@
         <alibaba-ttl.version>2.13.0</alibaba-ttl.version>
         <commons-text.version>1.10.0</commons-text.version>
         <angus-mail.version>2.0.3</angus-mail.version>
-        <justauth.version>1.16.6</justauth.version>
+        <justauth.version>1.16.7</justauth.version>
         <jsoup.version>1.15.3</jsoup.version>
         <nacos-client.version>2.4.3</nacos-client.version>
 
