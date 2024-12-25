@@ -49,6 +49,8 @@
         <module>zoom-opentelemetry</module>
         <!--社交模块-->
         <module>zoom-social</module>
+        <!--poi模块-->
+        <module>zoom-poi</module>
     </modules>
 
 
