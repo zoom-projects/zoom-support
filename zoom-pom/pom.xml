@@ -25,7 +25,7 @@
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <dynamic-datasource.version>4.3.1</dynamic-datasource.version>
         <springdoc.version>2.6.0</springdoc.version>
-        <lombok.version>1.18.22</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <hutool.version>5.8.35</hutool.version>
         <guava.version>32.0.0-jre</guava.version>
