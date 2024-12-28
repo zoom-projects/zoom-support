@@ -2,9 +2,9 @@ package com.hb0730.zoom.poi;
 
 import cn.hutool.core.bean.BeanDesc;
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.ReflectUtil;
-import cn.hutool.core.util.StrUtil;
 import com.hb0730.zoom.base.exception.ZoomException;
+import com.hb0730.zoom.base.utils.ReflectUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.poi.annotation.ExcelField;
 import com.hb0730.zoom.poi.filedtype.FieldType;
 import com.hb0730.zoom.poi.util.ExcelFieldUtil;
@@ -132,6 +132,40 @@ public class ExcelImport implements Closeable {
         this.workbook = WorkbookFactory.create(is);
         setSheet(sheetIndexOrName, headNum);
         log.debug("Init Excel Import [{}] success!", filename);
+    }
+
+    /**
+     * 构造,读取第一个sheet的第一个行为表头<br>
+     * <strong>此方法不会关闭流</strong>
+     *
+     * @param is {@link InputStream}
+     */
+    public ExcelImport(InputStream is) throws IOException {
+        this(is, 0);
+    }
+
+    /**
+     * 构造,读取第一个sheet<br>
+     * <strong>此方法不会关闭流</strong>
+     *
+     * @param is      {@link InputStream}
+     * @param headNum 表头行数
+     */
+    public ExcelImport(InputStream is, int headNum) throws IOException {
+        this(is, headNum, "0");
+    }
+
+    /**
+     * 构造<br>
+     * <strong>此方法不会关闭流</strong>
+     *
+     * @param is               {@link InputStream}
+     * @param headNum          表头行数
+     * @param sheetIndexOrName sheet的名字或者序号
+     */
+    public ExcelImport(InputStream is, int headNum, String sheetIndexOrName) throws IOException {
+        this.workbook = WorkbookFactory.create(is);
+        setSheet(sheetIndexOrName, headNum);
     }
 
     /**

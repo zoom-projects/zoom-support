@@ -5,6 +5,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.google.common.collect.Maps;
 
 import java.lang.annotation.Annotation;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -15,6 +16,19 @@ import java.util.Map;
  */
 @EnableSpringUtil
 public class AppUtil extends SpringUtil {
+
+    /**
+     * 获取bean
+     *
+     * @param type bean类型
+     * @param <T>  bean类型
+     * @return bean
+     */
+    public static <T> Collection<T> getBeans(Class<T> type) {
+        Map<String, T> beans = SpringUtil.getBeansOfType(type);
+        return beans.values();
+    }
+
     /**
      * 根据注解获取bean
      *

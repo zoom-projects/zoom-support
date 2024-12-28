@@ -22,7 +22,6 @@
         <module>zoom-pom</module>
         <!-- 基础模块 -->
         <module>zoom-base</module>
-        <module>zoom-base-ext</module>
         <!-- redis缓存模块 -->
         <module>zoom-cache</module>
         <!-- 邮件模块 -->
