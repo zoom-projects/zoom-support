@@ -27,7 +27,7 @@
         <springdoc.version>2.6.0</springdoc.version>
         <lombok.version>1.18.22</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
-        <hutool.version>5.8.32</hutool.version>
+        <hutool.version>5.8.35</hutool.version>
         <guava.version>32.0.0-jre</guava.version>
         <aws-s3.version>2.25.27</aws-s3.version>
         <alibaba-ttl.version>2.13.0</alibaba-ttl.version>
