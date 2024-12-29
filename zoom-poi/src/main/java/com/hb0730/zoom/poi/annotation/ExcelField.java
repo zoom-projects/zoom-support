@@ -82,6 +82,14 @@ public @interface ExcelField {
     String dataFormat() default "";
 
 
+    /**
+     * 字典类型
+     *
+     * @return .
+     */
+    String dictKey() default "";
+
+
     public enum Align {
         AUTO, LEFT, CENTER, RIGHT
     }

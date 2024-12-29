@@ -1,6 +1,7 @@
 package com.hb0730.zoom.poi.filedtype;
 
-import cn.hutool.core.util.StrUtil;
+import com.hb0730.zoom.base.utils.StrUtil;
+import com.hb0730.zoom.poi.annotation.ExcelField;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -11,14 +12,13 @@ import java.text.NumberFormat;
  */
 public class MoneyType implements FieldType {
     private NumberFormat nf = new DecimalFormat(",##0.00");
-
+    
     @Override
-    public Object getValue(String val) {
+    public Object getValue(String val, ExcelField excelField) {
         return StrUtil.isEmpty(val) ? "" : StrUtil.replace(val, ",", "");
     }
 
-    @Override
-    public String setValue(Object val) {
+    public String setValue(Object val, ExcelField excelField) {
         return StrUtil.isEmpty(val.toString()) ? "" : this.nf.format(val);
     }
 

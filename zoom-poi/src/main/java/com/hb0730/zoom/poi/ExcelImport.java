@@ -308,7 +308,7 @@ public class ExcelImport implements Closeable {
                         if (StrUtil.isNotBlank(excelField.attrName())) {
                             if (excelField.fieldType() != FieldType.class) {
                                 ft = this.getFieldType(excelField.fieldType());
-                                val = ft.getValue(Convert.toStr(val));
+                                val = ft.getValue(Convert.toStr(val), excelField);
                             }
                         } else {
                             if (valType == String.class) {
@@ -340,7 +340,7 @@ public class ExcelImport implements Closeable {
                                 }
                             } else if (excelField.fieldType() != FieldType.class) {
                                 ft = this.getFieldType(excelField.fieldType());
-                                val = ft.getValue(Convert.toStr(val));
+                                val = ft.getValue(Convert.toStr(val), excelField);
                             }
                         }
 

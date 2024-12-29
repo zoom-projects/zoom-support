@@ -52,6 +52,7 @@ public class ExcelExport implements Closeable {
     private Sheet sheet;
     private List<Object[]> annotationList;
     private final Map<Class<? extends FieldType>, FieldType> fieldTypes;
+    private Class<?> clazz;
     @Setter
     private Map<String, CellStyle> styles;
 
@@ -65,6 +66,7 @@ public class ExcelExport implements Closeable {
 
     public ExcelExport(Workbook workbook, String sheetName, String title, Class<?> clazz) {
         this.fieldTypes = new HashMap<>();
+        this.clazz = clazz;
         if (null != workbook) {
             this.workbook = workbook;
         }
@@ -112,6 +114,7 @@ public class ExcelExport implements Closeable {
      */
     public void createSheet(String sheetName, String title, Class<?> clazz) {
         this.annotationList = ExcelFieldUtil.getAnnotationValue(clazz);
+        this.clazz = clazz;
 
         List<String> headerList = new ArrayList<>();
         List<Integer> headerWidthList = new ArrayList<>();
@@ -206,7 +209,7 @@ public class ExcelExport implements Closeable {
      * @return .
      */
     public Cell addCell(Row row, int index, Object value) {
-        return addCell(row, index, value, ExcelField.Align.AUTO, FieldType.class, null);
+        return addCell(row, index, value, ExcelField.Align.AUTO, null, FieldType.class, null);
     }
 
     /**
@@ -216,11 +219,12 @@ public class ExcelExport implements Closeable {
      * @param index      列
      * @param value      值
      * @param align      对齐方式
+     * @param excelField 注解
      * @param fieldType  字段类型
      * @param dataFormat 数据格式
      * @return .
      */
-    public Cell addCell(Row row, int index, Object value, ExcelField.Align align,
+    public Cell addCell(Row row, int index, Object value, ExcelField.Align align, ExcelField excelField,
                         Class<? extends FieldType> fieldType, String dataFormat) {
         Cell cell = row.createCell(index);
         String defaultDataFormat = null;
@@ -231,11 +235,9 @@ public class ExcelExport implements Closeable {
             } else {
                 if (null != fieldType && fieldType != FieldType.class) {
                     FieldType type = getFieldType(fieldType);
-                    cell.setCellValue(type.setValue(value));
+                    cell.setCellValue(type.setValue(value, excelField));
                     defaultDataFormat = type.getDataFormat();
-                }
-
-                if (value instanceof String) {
+                } else if (value instanceof String) {
                     cell.setCellValue((String) value);
                 } else if (value instanceof Integer) {
                     cell.setCellValue((Integer) value);
@@ -377,7 +379,7 @@ public class ExcelExport implements Closeable {
                 } else if (annotation[1] instanceof Method method) {
                     value = ReflectUtil.invoke(e, method);
                 }
-                addCell(row, i, value, excelField.align(), excelField.fieldType(), excelField.dataFormat());
+                addCell(row, i, value, excelField.align(), excelField, excelField.fieldType(), excelField.dataFormat());
                 sb.append(value).append(",");
             }
             log.debug("write data [{}] success", sb);
