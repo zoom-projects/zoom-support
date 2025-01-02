@@ -69,4 +69,9 @@ public interface ZoomConst {
      * 字典-语录类型
      */
     String DICT_GOROKU_TYPE = "gorokuType";
+
+    /**
+     * 用户订阅消息缓存KEY
+     */
+    String USER_SUBSCRIBE_MSG_CACHE_KEY = "user:subscribe:msg";
 }
