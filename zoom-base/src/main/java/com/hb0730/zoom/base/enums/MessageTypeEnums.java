@@ -11,7 +11,8 @@ import com.hb0730.zoom.base.PairEnum;
  */
 public enum MessageTypeEnums implements PairEnum<String, Pair<String, String>> {
     SMS(new Pair<>("SMS", "短信")),
-    EMAIL(new Pair<>("EMAIL", "邮箱"));
+    EMAIL(new Pair<>("EMAIL", "邮箱")),
+    SYS(new Pair<>("SYS", "站内消息"));
     private final Pair<String, String> status;
 
     MessageTypeEnums(Pair<String, String> status) {
