@@ -22,6 +22,7 @@ import com.hb0730.zoom.mybatis.query.core.impl.LikeLeftQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.LikeQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.LikeRightQueryHandler;
 import com.hb0730.zoom.mybatis.query.core.impl.OrEqualsPredicateHandler;
+import com.hb0730.zoom.mybatis.query.core.impl.OrLikePredicateHandler;
 import com.hb0730.zoom.mybatis.query.doamin.PageRequest;
 import org.springframework.beans.BeanUtils;
 
@@ -57,6 +58,7 @@ public class QueryHelper {
         register(new InQueryHandler());
         register(new OrEqualsPredicateHandler());
         register(new BetweenQueryHandler());
+        register(new OrLikePredicateHandler());
     }
 
     /**
