@@ -9,6 +9,16 @@ import com.hb0730.zoom.base.utils.StrUtil;
 public class OssUtil {
 
     /**
+     * 获取 前缀+objectKey
+     *
+     * @param objectKey objectKey
+     * @return zoom/{objectKey}
+     */
+    public static String getObjectKey(String objectKey) {
+        return "zoom/" + objectKey;
+    }
+
+    /**
      * 重命名文件
      *
      * @param fileName 文件名
