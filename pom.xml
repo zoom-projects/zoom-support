@@ -125,6 +125,14 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <!--github packages-->
+        <repository>
+            <id>github</id>
+            <name>GitHub hb0730 Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/hb0730/zoom</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <plugins>
