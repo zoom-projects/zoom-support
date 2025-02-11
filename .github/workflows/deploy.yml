@@ -6,6 +6,7 @@ on:
       - 'v*'
       - 'release-*'
       - '*-snapshot'
+  workflow_dispatch:
 
 jobs:
   build:
