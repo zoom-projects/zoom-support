@@ -1,7 +1,8 @@
 package com.hb0730.zoom.mybatis.core.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.hb0730.zoom.base.ext.security.SecurityUtils;
+import com.hb0730.zoom.base.AppUtil;
+import com.hb0730.zoom.base.meta.ICurrentUserService;
 import com.hb0730.zoom.base.meta.UserInfo;
 import org.apache.ibatis.reflection.MetaObject;
 
@@ -26,8 +27,12 @@ public class FieldFillHandler implements MetaObjectHandler {
     }
 
     private void fill(MetaObject metaObject) {
+        ICurrentUserService currentUserService = AppUtil.getBean(ICurrentUserService.class);
+        if (null == currentUserService) {
+            return;
+        }
+        UserInfo userInfo = currentUserService.getCurrentUser();
         Date date = new Date();
-        UserInfo userInfo = SecurityUtils.getLoginUser().orElse(new UserInfo());
         Object _value = getFieldValByName("created", metaObject);
         if (metaObject.hasSetter("created") && _value == null) {
             setFieldValByName("created", date, metaObject);

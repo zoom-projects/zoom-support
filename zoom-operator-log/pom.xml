@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.hb0730</groupId>
-        <artifactId>zoom-pom</artifactId>
+        <artifactId>zoom-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath/>
     </parent>
 
     <artifactId>zoom-operator-log</artifactId>
@@ -36,6 +35,7 @@
         <dependency>
             <groupId>com.hb0730</groupId>
             <artifactId>zoom-desensitize-core</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
@@ -43,10 +43,5 @@
             <artifactId>opentelemetry-sdk-trace</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.hb0730</groupId>
-            <artifactId>zoom-base-ext</artifactId>
-            <version>${zoom.version}</version>
-        </dependency>
     </dependencies>
 </project>

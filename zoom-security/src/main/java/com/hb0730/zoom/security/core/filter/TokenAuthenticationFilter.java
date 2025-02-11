@@ -1,10 +1,10 @@
 package com.hb0730.zoom.security.core.filter;
 
 import com.hb0730.zoom.base.R;
-import com.hb0730.zoom.base.ext.security.SecurityUtils;
 import com.hb0730.zoom.base.meta.UserContext;
 import com.hb0730.zoom.base.meta.UserInfo;
 import com.hb0730.zoom.base.utils.ServletUtil;
+import com.hb0730.zoom.security.core.service.SecurityConfigService;
 import com.hb0730.zoom.security.core.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,16 +29,18 @@ import java.util.Optional;
 @Slf4j
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final UserService userService;
+    private final SecurityConfigService securityConfigService;
 
-    public TokenAuthenticationFilter(UserService userService) {
+    public TokenAuthenticationFilter(UserService userService, SecurityConfigService securityConfigService) {
         this.userService = userService;
+        this.securityConfigService = securityConfigService;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         try {
             // 获取请求头 token
-            Optional<String> tokenOption = SecurityUtils.obtainAuthorization(request);
+            Optional<String> tokenOption = securityConfigService.obtainAuthorization(request);
             if (tokenOption.isPresent()) {
                 // 通过 token 获取用户信息
                 UserInfo userInfo = userService.getUserByToken(tokenOption.get());

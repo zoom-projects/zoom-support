@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.hb0730.zoom.base.meta.ICurrentUserService;
 import com.hb0730.zoom.desensitize.core.modifier.DesensitizeSerializerModifier;
 import com.hb0730.zoom.desensitize.core.serializer.MapDesensitizeSerializer;
 import com.hb0730.zoom.operator.log.configuration.config.OperatorLogConfig;
@@ -48,9 +49,10 @@ public class OperatorLogConfiguration {
      * @return aspect
      */
     @Bean
-    @ConditionalOnBean(OperatorLogFrameworkServiceDelegate.class)
+    @ConditionalOnBean({OperatorLogFrameworkService.class, ICurrentUserService.class})
     public OperatorLogAspect operatorLogAspect(OperatorLogConfig operatorLogConfig,
-                                               OperatorLogFrameworkService service) {
+                                               OperatorLogFrameworkService service,
+                                               ICurrentUserService currentUserService) {
         ObjectMapper objectMapper = new ObjectMapper();
         // 设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -72,6 +74,6 @@ public class OperatorLogConfiguration {
         // 设置参数到工具类中
         OperatorLogModelBuilder.setObjectMapper(objectMapper);
         OperatorLogModelBuilder.setOperatorLogConfig(operatorLogConfig);
-        return new OperatorLogAspect(service);
+        return new OperatorLogAspect(service, currentUserService);
     }
 }

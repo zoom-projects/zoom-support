@@ -20,5 +20,6 @@ public class SecurityConfig {
      * 匿名访问
      */
     private List<String> anonymousUrls;
+
 }
 

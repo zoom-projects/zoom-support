@@ -1,7 +1,7 @@
 package com.hb0730.zoom.operator.log.core.aspect;
 
 import cn.hutool.core.thread.ExecutorBuilder;
-import com.hb0730.zoom.base.ext.security.SecurityHolder;
+import com.hb0730.zoom.base.meta.ICurrentUserService;
 import com.hb0730.zoom.base.meta.UserInfo;
 import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.operator.log.core.annotation.IgnoreParameter;
@@ -17,7 +17,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -49,12 +48,13 @@ public class OperatorLogAspect {
 
 
     private final OperatorLogFrameworkService operatorLogFrameworkService;
+    private final ICurrentUserService currentUserService;
 
-    @Autowired
-    private SecurityHolder securityHolder;
 
-    public OperatorLogAspect(OperatorLogFrameworkService operatorLogFrameworkService) {
+    public OperatorLogAspect(OperatorLogFrameworkService operatorLogFrameworkService,
+                             ICurrentUserService currentUserService) {
         this.operatorLogFrameworkService = operatorLogFrameworkService;
+        this.currentUserService = currentUserService;
     }
 
     @Around("@annotation(o)")
@@ -167,7 +167,7 @@ public class OperatorLogAspect {
                 return;
             }
             // 获取当前用户
-            UserInfo user = this.getUser();
+            UserInfo user = currentUserService.getCurrentUser();
             if (user == null) {
                 return;
             }
@@ -198,19 +198,6 @@ public class OperatorLogAspect {
         }
     }
 
-    /**
-     * 获取当前用户
-     *
-     * @return user
-     */
-    private UserInfo getUser() {
-        UserInfo user = OperatorLogs.getUser();
-        if (user != null) {
-            return user;
-        }
-        // 登录上下文获取
-        return securityHolder.getLoginUser().orElse(null);
-    }
 
     /**
      * 异步保存日志

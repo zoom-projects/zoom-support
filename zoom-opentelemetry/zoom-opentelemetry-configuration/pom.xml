@@ -25,12 +25,14 @@
         <dependency>
             <groupId>io.opentelemetry.instrumentation</groupId>
             <artifactId>opentelemetry-logback-mdc-1.0</artifactId>
+            <version>${opentelemetry-alpha.version}</version>
         </dependency>
 
 
         <dependency>
             <groupId>com.hb0730</groupId>
             <artifactId>zoom-opentelemetry-sofa-rpc</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

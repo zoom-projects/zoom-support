@@ -1,11 +1,13 @@
 package com.hb0730.zoom.security.configuration;
 
-import com.hb0730.zoom.base.ext.security.SecurityUtils;
+import com.hb0730.zoom.base.meta.ICurrentUserService;
 import com.hb0730.zoom.security.configuration.config.SecurityConfig;
 import com.hb0730.zoom.security.core.context.TransmittableThreadLocalSecurityContextHolderStrategy;
 import com.hb0730.zoom.security.core.filter.TokenAuthenticationFilter;
 import com.hb0730.zoom.security.core.handler.AuthenticationEntryPointHandler;
 import com.hb0730.zoom.security.core.handler.ForbiddenAccessDeniedHandler;
+import com.hb0730.zoom.security.core.service.SecurityConfigService;
+import com.hb0730.zoom.security.core.service.SecurityHolder;
 import com.hb0730.zoom.security.core.service.SecurityHolderDelegate;
 import com.hb0730.zoom.security.core.service.UserService;
 import com.hb0730.zoom.security.core.strategy.AuthorizeRequestsCustomizer;
@@ -65,16 +67,18 @@ public class WebSecurityAutoConfiguration {
      * @return 权限不足处理器
      */
     @Bean
-    public AccessDeniedHandler accessDeniedHandler() {
-        return new ForbiddenAccessDeniedHandler();
+    @ConditionalOnBean(SecurityHolder.class)
+    public AccessDeniedHandler accessDeniedHandler(SecurityHolder securityHolder) {
+        return new ForbiddenAccessDeniedHandler(securityHolder);
     }
 
     /**
      * @return 密码加密器
      */
     @Bean
-    public PasswordEncoder passwordEncoder(SecurityConfig securityConfig) {
-        return SecurityUtils.defaultPasswordEncoder();
+    @ConditionalOnBean({SecurityConfigService.class})
+    public PasswordEncoder passwordEncoder(SecurityConfigService securityConfigService) {
+        return securityConfigService.passwordEncoder();
     }
 
     /**
@@ -123,9 +127,9 @@ public class WebSecurityAutoConfiguration {
      * @return token 认证过滤器
      */
     @Bean
-    @ConditionalOnBean(UserService.class)
-    public TokenAuthenticationFilter authenticationTokenFilter(UserService service) {
-        return new TokenAuthenticationFilter(service);
+    @ConditionalOnBean({UserService.class, SecurityConfigService.class})
+    public TokenAuthenticationFilter authenticationTokenFilter(UserService service, SecurityConfigService securityConfigService) {
+        return new TokenAuthenticationFilter(service, securityConfigService);
     }
 
     /**
@@ -136,8 +140,9 @@ public class WebSecurityAutoConfiguration {
      * @return security holder 代理用于内部 framework 调用
      */
     @Bean
-    public SecurityHolderDelegate securityHolder() {
-        return new SecurityHolderDelegate();
+    @ConditionalOnBean(ICurrentUserService.class)
+    public SecurityHolder securityHolder(ICurrentUserService currentUserService) {
+        return new SecurityHolderDelegate(currentUserService);
     }
 
     /**
