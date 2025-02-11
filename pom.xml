@@ -130,7 +130,7 @@
         <repository>
             <id>github</id>
             <name>GitHub hb0730 Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/hb0730/zoom</url>
+            <url>https://maven.pkg.github.com/zoom-projects/zoom-support</url>
         </repository>
     </distributionManagement>
 
