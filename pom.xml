@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hb0730</groupId>
-    <artifactId>zoom-parent</artifactId>
+    <artifactId>zoom-infra-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -126,12 +126,12 @@
     </dependencies>
 
     <distributionManagement>
-        <!--github packages-->
-        <repository>
-            <id>github</id>
-            <name>GitHub hb0730 Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/zoom-projects/zoom-support</url>
-        </repository>
+        <!--github packages 暂不支持匿名访问-->
+        <!--        <repository>-->
+        <!--            <id>github</id>-->
+        <!--            <name>GitHub hb0730 Apache Maven Packages</name>-->
+        <!--            <url>https://maven.pkg.github.com/zoom-projects/zoom-support</url>-->
+        <!--        </repository>-->
     </distributionManagement>
 
     <build>
