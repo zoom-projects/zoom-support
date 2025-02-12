@@ -109,8 +109,8 @@ public class OperatorLogModelBuilder implements Builder<OperatorLogModel> {
      */
     public OperatorLogModelBuilder fillRequest() {
         // traceId
-        String otelTraceId = TraceHolder.getOtelTraceId();
-        model.setTraceId(otelTraceId);
+        String traceId = TraceHolder.getTraceIdOrOtelTraceId();
+        model.setTraceId(traceId);
         // 填充请求信息
         Optional
                 .ofNullable(RequestContextHolder.getRequestAttributes())
