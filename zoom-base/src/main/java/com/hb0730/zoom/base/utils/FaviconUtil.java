@@ -96,6 +96,10 @@ public class FaviconUtil {
             }
             if (favicon.startsWith("/")) {
                 return url + favicon;
+            } else if (url.endsWith("/")) {
+                return url + favicon;
+            } else {
+                return url + "/" + favicon;
             }
         }
         return null;
