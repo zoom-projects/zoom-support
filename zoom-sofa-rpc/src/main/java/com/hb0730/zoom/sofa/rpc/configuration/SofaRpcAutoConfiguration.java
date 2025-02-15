@@ -16,11 +16,6 @@ import org.springframework.context.annotation.Bean;
 @AutoConfiguration
 @Slf4j
 public class SofaRpcAutoConfiguration {
-
-    public SofaRpcAutoConfiguration() {
-        intRpcRouter();
-    }
-
     @Bean
     public SofaRpcServiceInitializingBean sofaRpcServiceInitializingBean() {
         return new SofaRpcServiceInitializingBean();
@@ -30,6 +25,7 @@ public class SofaRpcAutoConfiguration {
     public SofaRpcBeanRegistryPostProcessor sofaRpcBeanRegister() {
         return new SofaRpcBeanRegistryPostProcessor();
     }
+
 
     private void intRpcRouter() {
         String env = AppUtil.getActiveProfile();

@@ -35,6 +35,15 @@ public class ConfigManager {
     }
 
     /**
+     * 加载配置
+     *
+     * @param properties 配置
+     */
+    public void loadProperties(Properties properties) {
+        ConfigManager.properties = properties;
+    }
+
+    /**
      * 获取配置
      *
      * @param appName 应用名称
