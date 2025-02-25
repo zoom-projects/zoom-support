@@ -33,7 +33,7 @@ public class SofaRpcConfigAutoConfiguration {
 
     public SofaRpcConfigAutoConfiguration(SofaRpcConfig sofaRpcConfig) throws NacosException, IOException {
         log.info("加载RPC配置: {}", sofaRpcConfig);
-        if (sofaRpcConfig.getLoadType() == SofaRpcConfig.LoadType.LOCAL) {
+        if (SofaRpcConfig.LoadType.LOCAL.equals(sofaRpcConfig.getLoadType())) {
             intRpcRouter();
         } else {
             nacosRpcRouter(sofaRpcConfig.getNacos());
