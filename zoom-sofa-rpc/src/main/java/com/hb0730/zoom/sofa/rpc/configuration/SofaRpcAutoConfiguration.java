@@ -38,6 +38,6 @@ public class SofaRpcAutoConfiguration {
     @ConditionalOnMissingBean
     public SofaRpcBeanRegistryPostProcessor sofaRpcBeanRegister(SofaRpcConfig
                                                                         sofaRpcConfig) {
-        return new SofaRpcBeanRegistryPostProcessor(sofaRpcConfig.getScanApiPackage());
+        return new SofaRpcBeanRegistryPostProcessor(sofaRpcConfig.getScanRpcService());
     }
 }

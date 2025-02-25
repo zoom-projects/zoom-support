@@ -24,7 +24,7 @@ public class SofaRpcConfig {
     /**
      * 扫描包路径
      */
-    private String scanApiPackage = "classpath*:com/hb0730/**/remote/**/*RpcService.class";
+    private String scanRpcService = "classpath*:com/hb0730/**/remote/**/*RpcService.class";
 
     public enum LoadType {
         /**
