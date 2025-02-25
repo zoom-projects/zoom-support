@@ -16,7 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 @AutoConfiguration
 @EnableConfigurationProperties(CacheProperties.class)
-@ConditionalOnProperty(prefix = "boot.admin.cache", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "zoom.cache", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CacheAutoConfig {
 
     /**
