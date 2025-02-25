@@ -25,12 +25,21 @@ import java.util.ServiceLoader;
 import java.util.Set;
 
 /**
+ * RPC服务初始化 将所有的RPC CLIENT注册到Spring容器
+ *
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/10/17
  */
 @Slf4j
 public class SofaRpcBeanRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
-    private static final String RPC_API_PATH = "classpath*:com/hb0730/**/remote/**/*RpcService.class";
+    private String rpcApiPath = "classpath*:com/hb0730/**/remote/**/*RpcService.class";
+
+    public SofaRpcBeanRegistryPostProcessor() {
+    }
+
+    public SofaRpcBeanRegistryPostProcessor(String rpcApiPath) {
+        this.rpcApiPath = rpcApiPath;
+    }
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
@@ -73,7 +82,7 @@ public class SofaRpcBeanRegistryPostProcessor implements BeanDefinitionRegistryP
         try {
             DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
             Resource[] resources = ResourcePatternUtils.getResourcePatternResolver(resourceLoader)
-                    .getResources(RPC_API_PATH);
+                    .getResources(rpcApiPath);
             for (Resource resource : resources) {
                 MetadataReader metadataReader = new SimpleMetadataReaderFactory(resourceLoader).getMetadataReader(resource);
                 Class<?> clazz = ClassUtils.forName(metadataReader.getClassMetadata().getClassName(),

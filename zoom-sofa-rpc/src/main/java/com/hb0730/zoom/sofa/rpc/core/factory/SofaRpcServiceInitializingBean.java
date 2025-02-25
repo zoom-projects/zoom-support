@@ -17,6 +17,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * RPC服务初始化,将所有的RPC SERVICE注册到SofaRpc
+ *
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/10/17
  */
@@ -36,7 +38,7 @@ public class SofaRpcServiceInitializingBean implements InitializingBean {
         Set<Map.Entry<String, Object>> entries = beans.entrySet();
         for (Map.Entry<String, Object> entry : entries) {
             Object rpcApi = entry.getValue();
-            
+
             log.info("~~初始化RPC SERVICE~~: {} ", rpcApi.getClass().getName());
             ServiceParam serviceParam = new ServiceParam();
             // 服务接口

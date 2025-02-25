@@ -21,6 +21,11 @@ public class SofaRpcConfig {
      */
     private NacosConfig nacos = new NacosConfig();
 
+    /**
+     * 扫描包路径
+     */
+    private String scanApiPackage = "classpath*:com/hb0730/**/remote/**/*RpcService.class";
+
     public enum LoadType {
         /**
          * 本地
