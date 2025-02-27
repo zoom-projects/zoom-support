@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -59,6 +60,7 @@ public class WebSecurityAutoConfiguration {
      * @return 认证失败处理器
      */
     @Bean
+    @ConditionalOnMissingBean
     public AuthenticationEntryPoint authenticationEntryPoint() {
         return new AuthenticationEntryPointHandler();
     }
