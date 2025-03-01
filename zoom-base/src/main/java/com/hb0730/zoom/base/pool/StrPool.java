@@ -8,6 +8,10 @@ import java.nio.charset.StandardCharsets;
  * @date 2024/10/14
  */
 public interface StrPool extends cn.hutool.core.text.StrPool {
+    /**
+     * 空字符串
+     */
+    String EMPTY = "";
 
     static String EQUALS = "=";
 

@@ -44,6 +44,21 @@ public class DateUtil extends cn.hutool.core.date.DateUtil {
     }
 
     /**
+     * 字符串转日期
+     *
+     * @param dateStr 字符串日期
+     * @param format  格式
+     * @return 时间
+     */
+    public static Date string2Date(String dateStr, String format) {
+        try {
+            return cn.hutool.core.date.DateUtil.parse(dateStr, format);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
      * 默认方式表示的系统当前日期，具体格式：年-月-日
      *
      * @return .
