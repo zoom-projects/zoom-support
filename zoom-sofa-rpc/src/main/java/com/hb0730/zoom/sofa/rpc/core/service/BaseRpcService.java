@@ -1,17 +1,24 @@
 package com.hb0730.zoom.sofa.rpc.core.service;
 
+import com.alipay.sofa.rpc.boot.runtime.binding.RpcBindingMethodInfo;
 import com.alipay.sofa.rpc.boot.runtime.param.BoltBindingParam;
 import com.alipay.sofa.runtime.api.client.ReferenceClient;
 import com.alipay.sofa.runtime.api.client.param.ReferenceParam;
 import com.hb0730.zoom.base.AppUtil;
+import com.hb0730.zoom.base.utils.ClassUtil;
 import com.hb0730.zoom.base.utils.StrUtil;
+import com.hb0730.zoom.sofa.rpc.core.annotation.RpcMethod;
 import com.hb0730.zoom.sofa.rpc.core.config.ConfigManager;
 import com.hb0730.zoom.sofa.rpc.core.config.RpcConfigProperties;
 import com.hb0730.zoom.sofa.rpc.core.factory.SofaRpcClientFactoryBean;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/10/17
  */
+@Slf4j
 public abstract class BaseRpcService<T> implements IRpcService {
     private final Map<String, T> RPC_SERVER_CACHE = new ConcurrentHashMap<>();
     @Getter
@@ -91,7 +99,13 @@ public abstract class BaseRpcService<T> implements IRpcService {
     public T getRpcService(String which) {
         String appName = getAppName(which);
         RpcConfigProperties server = getRpcServerConfig(appName);
-        return this.getRpcService(server, this.getRpcInterfaceClazz());
+        String key = String.format("%s:%s", server.getName(), this.getRpcInterfaceClazz().getName());
+        T RpcService = RPC_SERVER_CACHE.get(key);
+        if (null == RpcService) {
+            RpcService = this.getRpcService(server, this.getRpcInterfaceClazz());
+            RPC_SERVER_CACHE.put(key, RpcService);
+        }
+        return RpcService;
     }
 
     public T getRpcService() {
@@ -101,10 +115,12 @@ public abstract class BaseRpcService<T> implements IRpcService {
     @Override
     @SuppressWarnings("unchecked")
     public <V> V getRpcService(Class<V> clazz) {
-        T RpcService = RPC_SERVER_CACHE.get(clazz.getName());
+        RpcConfigProperties config = getRpcServerConfig();
+        String key = String.format("%s:%s", config.getName(), clazz.getName());
+        T RpcService = RPC_SERVER_CACHE.get(key);
         if (null == RpcService) {
-            RpcService = getRpcService(getRpcServerConfig(), (Class<T>) clazz);
-            RPC_SERVER_CACHE.put(clazz.getName(), RpcService);
+            RpcService = getRpcService(config, (Class<T>) clazz);
+            RPC_SERVER_CACHE.put(key, RpcService);
         }
         return (V) RpcService;
     }
@@ -117,6 +133,7 @@ public abstract class BaseRpcService<T> implements IRpcService {
      * @return RPC接口
      */
     protected T getRpcService(RpcConfigProperties serverConfig, Class<T> clazz) {
+        log.info("注册RPC CLIENT 服务: {}#{}", serverConfig.getName(), clazz.getName());
         SofaRpcClientFactoryBean clientFactoryBean = AppUtil.getBean(SofaRpcClientFactoryBean.class);
         ReferenceClient referenceClient = clientFactoryBean.getClientFactory().getClient(ReferenceClient.class);
         ReferenceParam<T> referenceParam = new ReferenceParam<>();
@@ -124,6 +141,10 @@ public abstract class BaseRpcService<T> implements IRpcService {
 
         //Bolt协议
         BoltBindingParam bindingParam = new BoltBindingParam();
+        // 获取类的方法存在@RpcMethod注解
+        Method[] methods = ClassUtil.getPublicMethods(clazz);
+        List<RpcBindingMethodInfo> methodInfos = getRpcBindingMethodInfos(methods);
+        bindingParam.setMethodInfos(methodInfos);
         // 设置服务地址 直连模式
         String address = serverConfig.getAddress();
         if (StrUtil.isNotBlank(address)) {
@@ -133,5 +154,20 @@ public abstract class BaseRpcService<T> implements IRpcService {
 
         referenceParam.setBindingParam(bindingParam);
         return referenceClient.reference(referenceParam);
+    }
+
+    private static List<RpcBindingMethodInfo> getRpcBindingMethodInfos(Method[] methods) {
+        List<RpcBindingMethodInfo> methodInfos = new ArrayList<>();
+        for (Method method : methods) {
+            if (method.isAnnotationPresent(RpcMethod.class)) {
+                RpcMethod rpcMethod = method.getAnnotation(RpcMethod.class);
+                RpcBindingMethodInfo methodInfo = new RpcBindingMethodInfo();
+                methodInfo.setName(method.getName());
+                methodInfo.setTimeout(rpcMethod.timeout());
+                methodInfo.setType(rpcMethod.type());
+                methodInfos.add(methodInfo);
+            }
+        }
+        return methodInfos;
     }
 }
