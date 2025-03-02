@@ -99,7 +99,7 @@ public abstract class BaseRpcService<T> implements IRpcService {
     public T getRpcService(String which) {
         String appName = getAppName(which);
         RpcConfigProperties server = getRpcServerConfig(appName);
-        String key = String.format("%s:%s", server.getName(), this.getRpcInterfaceClazz().getName());
+        String key = String.format("%s#%s", server.getName(), this.getRpcInterfaceClazz().getName());
         T RpcService = RPC_SERVER_CACHE.get(key);
         if (null == RpcService) {
             RpcService = this.getRpcService(server, this.getRpcInterfaceClazz());
@@ -116,7 +116,7 @@ public abstract class BaseRpcService<T> implements IRpcService {
     @SuppressWarnings("unchecked")
     public <V> V getRpcService(Class<V> clazz) {
         RpcConfigProperties config = getRpcServerConfig();
-        String key = String.format("%s:%s", config.getName(), clazz.getName());
+        String key = String.format("%s#%s", config.getName(), clazz.getName());
         T RpcService = RPC_SERVER_CACHE.get(key);
         if (null == RpcService) {
             RpcService = getRpcService(config, (Class<T>) clazz);
