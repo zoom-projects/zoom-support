@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * AppUtil
@@ -56,5 +57,16 @@ public class AppUtil extends SpringUtil {
     public static <T> T getBean(Class<T> type, T defaultValue) {
         T value = SpringUtil.getBean(type);
         return value == null ? defaultValue : value;
+    }
+
+    /**
+     * 获取bean
+     *
+     * @param type bean类型
+     * @param <T>  bean类型
+     * @return bean
+     */
+    public static <T> Optional<T> getBeanOptional(Class<T> type) {
+        return Optional.ofNullable(SpringUtil.getBean(type));
     }
 }
