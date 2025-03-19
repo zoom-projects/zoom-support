@@ -17,3 +17,4 @@
 13. `zoom-sofa-rpc` 提供[sofa-rpc](https://github.com/sofastack/sofa-rpc)支持
 14. `zoom-springdoc` 提供`springdoc`支持，支持`swagger`等
 15. `zoom-web` 处理`全局异常`、`跨域` 等配置
+16. `zoom-spring-retry` 提供`spring-retry`支持
