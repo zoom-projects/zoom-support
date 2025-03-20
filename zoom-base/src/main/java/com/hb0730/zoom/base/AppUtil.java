@@ -69,4 +69,23 @@ public class AppUtil extends SpringUtil {
     public static <T> Optional<T> getBeanOptional(Class<T> type) {
         return Optional.ofNullable(SpringUtil.getBean(type));
     }
+
+    /**
+     * 是否是测试环境,环境变量Key为zoom.staging
+     *
+     * @return boolean
+     */
+    public static boolean staging() {
+        return staging("zoom.staging");
+    }
+
+    /**
+     * 是否是测试环境
+     *
+     * @param key key,环境变量
+     * @return boolean
+     */
+    public static boolean staging(String key) {
+        return AppUtil.getProperty(key, Boolean.class, false);
+    }
 }
