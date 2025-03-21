@@ -23,4 +23,14 @@ public interface StrPool extends cn.hutool.core.text.StrPool {
      * utf-8
      */
     String UTF_8 = "UTF-8";
+
+    /**
+     * {@code "*"}
+     */
+    String ASTERISK = "*";
+
+    /**
+     * {@code "/**"}
+     */
+    String PATH_PATTERN = "/**";
 }
