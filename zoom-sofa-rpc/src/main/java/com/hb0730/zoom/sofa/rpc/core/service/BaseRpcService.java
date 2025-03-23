@@ -164,7 +164,7 @@ public abstract class BaseRpcService<T> implements IRpcService {
                 RpcBindingMethodInfo methodInfo = new RpcBindingMethodInfo();
                 methodInfo.setName(method.getName());
                 methodInfo.setTimeout(rpcMethod.timeout());
-                methodInfo.setType(rpcMethod.type());
+                methodInfo.setType(rpcMethod.type().getCode());
                 methodInfos.add(methodInfo);
             }
         }

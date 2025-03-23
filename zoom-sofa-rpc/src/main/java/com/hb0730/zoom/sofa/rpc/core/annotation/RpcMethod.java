@@ -1,5 +1,8 @@
 package com.hb0730.zoom.sofa.rpc.core.annotation;
 
+import com.hb0730.zoom.base.Pair;
+import com.hb0730.zoom.base.PairEnum;
+
 /**
  * rpc方法
  *
@@ -16,17 +19,46 @@ public @interface RpcMethod {
      * <ul>
      *     <li>sync 同步</li>
      *     <li>future 异步</li>
-     *     <li>callback 回调</li>
      * </ul>
      *
      * @return .
      */
-    String type() default "sync";
+    CallType type() default CallType.SYNC;
 
     /**
-     * 超时时间
+     * 超时时间,默认3s,单位毫秒ms
      *
      * @return .
      */
     int timeout() default 3000;
+
+    /**
+     * 调用类型
+     *
+     * @see <a href="https://www.sofastack.tech/projects/sofa-rpc/invoke-type/">sofa-rpc</a>
+     */
+    enum CallType implements PairEnum<String, Pair<String, String>> {
+        SYNC(new Pair<>("sync", "同步")),
+        FUTURE(new Pair<>("future", "异步"));
+        private final Pair<String, String> pair;
+
+        CallType(Pair<String, String> pair) {
+            this.pair = pair;
+        }
+
+        @Override
+        public Pair<String, String> getValue() {
+            return pair;
+        }
+
+        @Override
+        public String getCode() {
+            return pair.getCode();
+        }
+
+        @Override
+        public String getMessage() {
+            return pair.getMessage();
+        }
+    }
 }

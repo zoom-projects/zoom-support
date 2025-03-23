@@ -33,4 +33,9 @@ public interface StrPool extends cn.hutool.core.text.StrPool {
      * {@code "/**"}
      */
     String PATH_PATTERN = "/**";
+
+    /**
+     * {@code "\n"}
+     */
+    String NEWLINE = "\n";
 }
