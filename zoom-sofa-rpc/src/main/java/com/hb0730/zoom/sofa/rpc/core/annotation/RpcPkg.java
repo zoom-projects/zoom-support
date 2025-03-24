@@ -15,7 +15,11 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PACKAGE)
-
 public @interface RpcPkg {
+    /**
+     * rpc 应用名称
+     *
+     * @return .
+     */
     String value() default "";
 }
