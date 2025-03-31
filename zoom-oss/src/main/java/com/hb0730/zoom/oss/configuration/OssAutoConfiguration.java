@@ -19,7 +19,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties({OssProperties.class})
 public class OssAutoConfiguration {
 
-    @Bean
+    /**
+     * oss bean
+     *
+     * @param properties properties
+     * @return oss storage
+     */
+    @Bean(destroyMethod = "destroy")
     @ConditionalOnProperty(prefix = "zoom.oss", name = "type", havingValue = "s3")
     @ConditionalOnMissingBean
     public OssStorage s3OssStorage(OssProperties properties) {

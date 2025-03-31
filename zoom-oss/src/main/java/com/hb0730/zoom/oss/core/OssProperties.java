@@ -80,7 +80,7 @@ public interface OssProperties {
      * @param accessUrl 访问url
      * @return key
      */
-    default String renameObjectKey(String accessUrl) {
+    default String getObjectKey(String accessUrl) {
         String objectName;
         if (StrUtil.isNotBlank(this.getCustomDomain()) && this.getCustomDomain().toLowerCase().startsWith("http")) {
             objectName = accessUrl.replace(this.getCustomDomain() + "/", "");
@@ -99,7 +99,7 @@ public interface OssProperties {
      * @param path     路径 {@code 2021/04/12/}
      * @return key, 例如：{@code 2021/04/12/1_random.jpg}
      */
-    default String renameObjectKey(String fileName, String path) {
+    default String getObjectKey(String fileName, String path) {
         return OssUtil.renameObjectKey(fileName, path);
     }
 
@@ -110,8 +110,8 @@ public interface OssProperties {
      * @param path 路径
      * @return key
      */
-    default String renameObjectKey(File file, final String path) {
-        return this.renameObjectKey(file.getName(), path);
+    default String getObjectKey(File file, final String path) {
+        return this.getObjectKey(file.getName(), path);
     }
 
     /**

@@ -100,7 +100,7 @@ public interface OssStorage extends OssStorageInit {
      * @param objectKey objectKey
      * @return 文件流
      */
-    InputStream getFile(String objectKey);
+    InputStream getInputStream(String objectKey);
 
     /**
      * 获取文件
@@ -109,7 +109,58 @@ public interface OssStorage extends OssStorageInit {
      * @param bucketName bucketName
      * @return 文件流
      */
-    InputStream getFile(String objectKey, String bucketName);
+    InputStream getInputStream(String objectKey, String bucketName);
+
+    /**
+     * 获取文件
+     *
+     * @param accessUrl 访问url
+     * @return 文件流
+     */
+    InputStream getInputStreamByAccessUrl(String accessUrl);
+
+    /**
+     * 获取文件
+     *
+     * @param accessUrl  访问url
+     * @param bucketName bucketName
+     * @return 文件流
+     */
+    InputStream getInputStreamByAccessUrl(String accessUrl, String bucketName);
+
+    /**
+     * 获取文件
+     *
+     * @param objectKey objectKey
+     * @return 文件
+     */
+    File downloadFile(String objectKey);
+
+    /**
+     * 获取文件
+     *
+     * @param objectKey  objectKey
+     * @param bucketName bucketName
+     * @return 文件
+     */
+    File downloadFile(String objectKey, String bucketName);
+
+    /**
+     * 获取文件
+     *
+     * @param accessUrl 访问url
+     * @return 文件
+     */
+    File downloadFileByAccessUrl(String accessUrl);
+
+    /**
+     * 获取文件
+     *
+     * @param accessUrl  访问url
+     * @param bucketName bucketName
+     * @return 文件
+     */
+    File downloadFileByAccessUrl(String accessUrl, String bucketName);
 
     /**
      * 获取分享链接,默认过期时间1小时

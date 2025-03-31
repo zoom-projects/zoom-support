@@ -9,4 +9,9 @@ public interface OssStorageInit {
      * 初始化
      */
     void init();
+
+    /**
+     * 销毁
+     */
+    void destroy();
 }

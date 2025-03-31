@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class S3OssStorage extends AbstractOssStorage {
     @Override
     public void deleteUrl(String accessUrl) {
         has(accessUrl, "accessUrl is null");
-        String objectKey = ossProperties.renameObjectKey(accessUrl);
+        String objectKey = ossProperties.getObjectKey(accessUrl);
         has(objectKey, "objectKey is null");
         removeObject(ossProperties.getBucketName(), objectKey);
     }
@@ -68,7 +69,7 @@ public class S3OssStorage extends AbstractOssStorage {
     public String uploadFile(File file) {
         has(file, "file is null")
                 .has(ossProperties, "ossProperties is null");
-        String objectKey = ossProperties.renameObjectKey(file, "");
+        String objectKey = ossProperties.getObjectKey(file, "");
         return uploadFile(objectKey, file);
     }
 
@@ -141,12 +142,12 @@ public class S3OssStorage extends AbstractOssStorage {
     }
 
     @Override
-    public InputStream getFile(String objectKey) {
-        return getFile(objectKey, ossProperties.getBucketName());
+    public InputStream getInputStream(String objectKey) {
+        return getInputStream(objectKey, ossProperties.getBucketName());
     }
 
     @Override
-    public InputStream getFile(String objectKey, String bucketName) {
+    public InputStream getInputStream(String objectKey, String bucketName) {
         has(objectKey, "objectKey is null")
                 .has(bucketName, "bucketName is null");
         try {
@@ -158,6 +159,54 @@ public class S3OssStorage extends AbstractOssStorage {
             log.error("get file error", e);
         }
         return null;
+    }
+
+    @Override
+    public InputStream getInputStreamByAccessUrl(String accessUrl) {
+        return getInputStreamByAccessUrl(accessUrl, ossProperties.getBucketName());
+    }
+
+    @Override
+    public InputStream getInputStreamByAccessUrl(String accessUrl, String bucketName) {
+        has(accessUrl, "accessUrl is null")
+                .has(bucketName, "bucketName is null");
+        String objectKey = ossProperties.getObjectKey(accessUrl);
+        return getInputStream(objectKey, bucketName);
+    }
+
+    @Override
+    public File downloadFile(String objectKey) {
+        return downloadFile(objectKey, ossProperties.getBucketName());
+    }
+
+    @Override
+    public File downloadFile(String objectKey, String bucketName) {
+        has(objectKey, "objectKey is null")
+                .has(bucketName, "bucketName is null");
+        try {
+            ResponseBytes<GetObjectResponse> responseBytes = _getOssClient().getObjectAsBytes(
+                    builder -> builder.bucket(bucketName).key(objectKey)
+            );
+            // 创建临时文件
+            File file = File.createTempFile(objectKey, ".tmp");
+            // 写入临时文件
+            Files.copy(responseBytes.asInputStream(), file.toPath());
+            return file;
+        } catch (Exception e) {
+            log.error("download file error", e);
+        }
+        return null;
+    }
+
+    @Override
+    public File downloadFileByAccessUrl(String accessUrl) {
+        return downloadFileByAccessUrl(accessUrl, ossProperties.getBucketName());
+    }
+
+    @Override
+    public File downloadFileByAccessUrl(String accessUrl, String bucketName) {
+        String objectKey = ossProperties.getObjectKey(accessUrl);
+        return downloadFile(objectKey, bucketName);
     }
 
     @Override
@@ -248,6 +297,13 @@ public class S3OssStorage extends AbstractOssStorage {
                     s3Client = buildClient();
                 }
             }
+        }
+    }
+
+    @Override
+    public void destroy() {
+        if (null != s3Client) {
+            s3Client.close();
         }
     }
 
