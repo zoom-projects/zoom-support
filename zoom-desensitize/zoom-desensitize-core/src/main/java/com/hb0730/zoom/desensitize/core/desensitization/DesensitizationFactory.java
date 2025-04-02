@@ -29,8 +29,9 @@ public class DesensitizationFactory {
      * @param type 脱敏类型
      * @return Desensitization
      */
-    public static Desensitization<?> getDesensitization(DesensitizationType type) {
-        return map.get(type.name());
+    @SuppressWarnings("unchecked")
+    public static <T> Desensitization<T> getDesensitization(DesensitizationType type) {
+        return (Desensitization<T>) map.get(type.name());
     }
 
     /**
@@ -39,8 +40,9 @@ public class DesensitizationFactory {
      * @param type 脱敏类型
      * @return Desensitization
      */
-    public static Desensitization<?> getDesensitization(String type) {
-        return map.get(type);
+    @SuppressWarnings("unchecked")
+    public static <T> Desensitization<T> getDesensitization(String type) {
+        return (Desensitization<T>) map.get(type);
     }
 
     /**
@@ -49,8 +51,8 @@ public class DesensitizationFactory {
      * @param type            脱敏类型
      * @param desensitization 脱敏处理类
      */
-    public static void registerDesensitization(DesensitizationType type,
-                                               Desensitization<?> desensitization) {
+    public static <T> void registerDesensitization(DesensitizationType type,
+                                                   Desensitization<T> desensitization) {
         map.put(type.name(), desensitization);
     }
 
@@ -60,8 +62,8 @@ public class DesensitizationFactory {
      * @param type            脱敏类型
      * @param desensitization 脱敏处理类
      */
-    public static void registerDesensitization(String type,
-                                               Desensitization<?> desensitization) {
+    public static <T> void registerDesensitization(String type,
+                                                   Desensitization<T> desensitization) {
         map.put(type, desensitization);
     }
 }
