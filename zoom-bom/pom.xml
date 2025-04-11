@@ -110,6 +110,23 @@
                 <artifactId>zoom-spring-retry</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
+
+            <!--zoom-robots-->
+            <dependency>
+                <groupId>com.hb0730</groupId>
+                <artifactId>zoom-dingtalk-robot</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hb0730</groupId>
+                <artifactId>zoom-work-wechat-robot</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hb0730</groupId>
+                <artifactId>zoom-feishu-robot</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

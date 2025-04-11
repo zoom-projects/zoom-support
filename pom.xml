@@ -74,6 +74,7 @@
         <module>zoom-web</module>
         <module>zoom-bom</module>
         <module>zoom-spring-retry</module>
+        <module>zoom-robots</module>
     </modules>
 
 
