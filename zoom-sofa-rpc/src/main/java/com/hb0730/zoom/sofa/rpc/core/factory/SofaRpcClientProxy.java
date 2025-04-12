@@ -30,7 +30,11 @@ public class SofaRpcClientProxy<T> extends BaseRpcService<T> implements MethodIn
 
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-        return method.invoke(getRpcService(), args);
+        try {
+            return method.invoke(getRpcService(), args);
+        } catch (Exception e) {
+            throw e.getCause();
+        }
     }
 
     @Override

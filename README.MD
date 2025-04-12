@@ -18,3 +18,4 @@
 14. `zoom-springdoc` 提供`springdoc`支持，支持`swagger`等
 15. `zoom-web` 处理`全局异常`、`跨域` 等配置
 16. `zoom-spring-retry` 提供`spring-retry`支持
+17. `zoom-robots` 提供`企业微信`、`钉钉`等自定义机器人消息发送的支持
