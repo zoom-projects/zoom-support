@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <springboot.version>3.4.2</springboot.version>
+        <springboot.version>3.4.5</springboot.version>
         <sofa-boot.version>4.4.1</sofa-boot.version>
         <opentelemetry.version>1.40.0</opentelemetry.version>
         <opentelemetry-instrumentation.version>2.15.0</opentelemetry-instrumentation.version>
