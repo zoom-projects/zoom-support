@@ -75,6 +75,7 @@
         <module>zoom-bom</module>
         <module>zoom-spring-retry</module>
         <module>zoom-robots</module>
+        <module>zoom-rabbitmq</module>
     </modules>
 
 

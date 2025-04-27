@@ -44,7 +44,7 @@ public class FeishuRobotClient extends DefaultRobotMessageSend {
     }
 
     @Override
-    public RobotResponse doSend(String json) throws RobotException {
+    protected RobotResponse doSend(String json) throws RobotException {
         Map<String, Object> body = JsonUtil.fromJson(json, new TypeReference<Map<String, Object>>() {
         });
         return doSend(body);

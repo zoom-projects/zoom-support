@@ -24,5 +24,5 @@ public abstract class DefaultRobotMessageSend implements RobotMessageSend {
      * @return 发送结果
      * @throws RobotException 发送异常
      */
-    public abstract RobotResponse doSend(String json) throws RobotException;
+    protected abstract RobotResponse doSend(String json) throws RobotException;
 }

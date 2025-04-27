@@ -36,7 +36,7 @@ public class WorkWechatRobotClient extends DefaultRobotMessageSend {
     }
 
     @Override
-    public RobotResponse doSend(String json) throws RobotException {
+    protected RobotResponse doSend(String json) throws RobotException {
         Assert.isNotBlank(webhook, "webhook 不能为空");
         HttpClient httpClient = HttpClient
                 .newBuilder()

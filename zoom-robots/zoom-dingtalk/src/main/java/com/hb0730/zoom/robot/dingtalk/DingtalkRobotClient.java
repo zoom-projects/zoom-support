@@ -45,7 +45,7 @@ public class DingtalkRobotClient extends DefaultRobotMessageSend {
     }
 
     @Override
-    public RobotResponse doSend(String json) throws RobotException {
+    protected RobotResponse doSend(String json) throws RobotException {
         Assert.isNotBlank(webhook, "webhook 不能为空");
         Assert.isNotBlank(json, "json 不能为空");
         String signature = null;
