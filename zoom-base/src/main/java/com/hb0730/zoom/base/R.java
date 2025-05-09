@@ -1,5 +1,6 @@
 package com.hb0730.zoom.base;
 
+import com.hb0730.zoom.base.meta.TraceHolder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -55,6 +56,12 @@ public class R<T> implements Serializable {
      */
     @Schema(description = "时间戳")
     private long timestamp = System.currentTimeMillis();
+
+    /**
+     * 链路追踪id
+     */
+    @Schema(description = "链路追踪id")
+    private String traceId;
 
 
     /**
@@ -223,6 +230,11 @@ public class R<T> implements Serializable {
         r.setSuccess(false);
         r.setData(data);
         return r;
+    }
+
+
+    public void getTraceId() {
+        this.traceId = TraceHolder.getTraceIdOrOtelTraceId();
     }
 
 }
