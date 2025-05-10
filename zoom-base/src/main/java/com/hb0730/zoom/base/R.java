@@ -61,7 +61,7 @@ public class R<T> implements Serializable {
      * 链路追踪id
      */
     @Schema(description = "链路追踪id")
-    private String traceId;
+    private String traceId = TraceHolder.getTraceIdOrOtelTraceId();
 
 
     /**
@@ -233,8 +233,8 @@ public class R<T> implements Serializable {
     }
 
 
-    public void getTraceId() {
-        this.traceId = TraceHolder.getTraceIdOrOtelTraceId();
-    }
+//    public void getTraceId() {
+//        this.traceId = TraceHolder.getTraceIdOrOtelTraceId();
+//    }
 
 }
