@@ -1,6 +1,7 @@
 package com.hb0730.zoom.mybatis.query.core.impl;
 
 import com.hb0730.zoom.mybatis.query.core.AbstractQueryHandler;
+import jakarta.annotation.Nonnull;
 
 import java.lang.annotation.Annotation;
 
@@ -16,7 +17,8 @@ public class InQueryHandler extends AbstractQueryHandler {
     }
 
     @Override
-    public void buildQuery(com.baomidou.mybatisplus.core.conditions.query.QueryWrapper<?> queryWrapper, String column, @javax.annotation.Nonnull Object value) {
+    public void buildQuery(com.baomidou.mybatisplus.core.conditions.query.QueryWrapper<?> queryWrapper, String column
+            , @Nonnull Object value) {
         queryWrapper.in(column, value);
     }
 }

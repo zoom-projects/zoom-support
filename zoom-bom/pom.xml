@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.hb0730</groupId>
-        <artifactId>zoom-infra-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
 
+    <groupId>com.hb0730</groupId>
     <artifactId>zoom-infra-bom</artifactId>
+    <packaging>pom</packaging>
+    <version>${version}</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <version>1.0.0-SNAPSHOT</version>
     </properties>
 
     <dependencyManagement>
@@ -23,109 +23,109 @@
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-base</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-cache</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-mail</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-springdoc</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-oss</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-security</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-mybatis</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-mybatis-ext</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-web</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-desensitize-core</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-desensitize-web</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-operator-log</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-sofa-rpc</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-opentelemetry-sofa-rpc</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-opentelemetry-configuration</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-social</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-poi</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-spring-retry</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
 
             <!--zoom-robots-->
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-dingtalk-robot</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-work-wechat-robot</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hb0730</groupId>
                 <artifactId>zoom-feishu-robot</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

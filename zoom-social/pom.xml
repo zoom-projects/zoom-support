@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.hb0730</groupId>
         <artifactId>zoom-infra-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${version}</version>
     </parent>
 
     <artifactId>zoom-social</artifactId>
@@ -21,7 +21,6 @@
         <dependency>
             <groupId>me.zhyd.oauth</groupId>
             <artifactId>JustAuth</artifactId>
-            <version>${justauth.version}</version>
         </dependency>
 
         <dependency>
@@ -36,7 +35,6 @@
         <dependency>
             <groupId>com.hb0730</groupId>
             <artifactId>zoom-cache</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>

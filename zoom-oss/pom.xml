@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.hb0730</groupId>
         <artifactId>zoom-infra-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${version}</version>
     </parent>
 
     <artifactId>zoom-oss</artifactId>
@@ -23,17 +23,14 @@
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>s3</artifactId>
-            <version>${aws-s3.version}</version>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>sts</artifactId>
-            <version>${aws-s3.version}</version>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>apache-client</artifactId>
-            <version>${aws-s3.version}</version>
         </dependency>
 
         <dependency>
@@ -49,7 +46,6 @@
         <dependency>
             <groupId>com.hb0730</groupId>
             <artifactId>zoom-base</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

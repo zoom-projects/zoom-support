@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.hb0730</groupId>
         <artifactId>zoom-infra-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${version}</version>
     </parent>
 
     <artifactId>zoom-poi</artifactId>
@@ -21,28 +21,23 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml-full</artifactId>
-            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
-            <version>${poi.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hb0730</groupId>
             <artifactId>zoom-base</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
 

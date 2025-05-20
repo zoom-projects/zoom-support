@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.hb0730</groupId>
         <artifactId>zoom-desensitize</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${version}</version>
     </parent>
 
     <artifactId>zoom-desensitize-core</artifactId>
@@ -25,7 +25,6 @@
         <dependency>
             <groupId>com.hb0730</groupId>
             <artifactId>zoom-base</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
