@@ -61,7 +61,7 @@ public class R<T> implements Serializable {
      * 链路追踪id
      */
     @Schema(description = "链路追踪id")
-    private String traceId = TraceHolder.getTraceIdOrOtelTraceId();
+    private String traceId = TraceHolder.getTraceId();
 
 
     /**

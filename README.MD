@@ -12,10 +12,12 @@
 8. `zoom-operator-log` 提供操作日志支持，基于`spring-aop`的操作日志记录支持
 9. `zoom-oss` 提供对象存储支持，支持`S3`等
 10. `zoom-poi` 提供`POI`支持，支持`Excel`等
-11. `zoom-security` 提供安全支持，包含`XSS`、`CSRF`、`SQL注入`等支持
-12. `zoom-social` 提供社交支持，包含`QQ`、`微信`等支持
-13. `zoom-sofa-rpc` 提供[sofa-rpc](https://github.com/sofastack/sofa-rpc)支持
-14. `zoom-springdoc` 提供`springdoc`支持，支持`swagger`等
-15. `zoom-web` 处理`全局异常`、`跨域` 等配置
+11. `zoom-rabbitmq` 提供`RabbitMQ`支持，包含`消息发送`、`接收`、`重试`等支持
+12. `zoom-robots` 提供`企业微信`、`钉钉`等自定义机器人消息发送的支持
+13. `zoom-security` 提供安全支持，包含`XSS`、`CSRF`、`SQL注入`等支持
+14. `zoom-social` 提供社交支持，包含`QQ`、`微信`等支持
+15. `zoom-sofa-rpc` 提供[sofa-rpc](https://github.com/sofastack/sofa-rpc)支持
 16. `zoom-spring-retry` 提供`spring-retry`支持
-17. `zoom-robots` 提供`企业微信`、`钉钉`等自定义机器人消息发送的支持
+17. `zoom-springdoc` 提供`springdoc`支持，支持`swagger`等
+18. `zoom-web` 处理`全局异常`、`跨域` 等配置
+

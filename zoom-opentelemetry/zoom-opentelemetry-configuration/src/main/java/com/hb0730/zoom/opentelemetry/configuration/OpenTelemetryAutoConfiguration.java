@@ -1,8 +1,12 @@
 package com.hb0730.zoom.opentelemetry.configuration;
 
+import com.hb0730.zoom.opentelemetry.configuration.config.TraceIdGenerator;
 import com.hb0730.zoom.opentelemetry.sofa.rpc.SofaRpcTelemetry;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.context.Context;
+import io.opentelemetry.sdk.autoconfigure.spi.AutoConfigurationCustomizerProvider;
+import io.opentelemetry.sdk.autoconfigure.spi.ConfigProperties;
+import io.opentelemetry.sdk.trace.SdkTracerProviderBuilder;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -27,6 +31,17 @@ public class OpenTelemetryAutoConfiguration {
     private static final String ACTUATOR_TASK_EXECUTOR_BEAN_NAME = "actuatorTaskExecutor";
     private static final String ACTUATOR_TASK_SCHEDULER_BEAN_NAME = "actuatorTaskScheduler";
 
+
+    @Bean
+    public AutoConfigurationCustomizerProvider otelCustom() {
+        return p -> p.addTracerProviderCustomizer(this::configTracerProviderCustomizer);
+    }
+
+
+    private SdkTracerProviderBuilder configTracerProviderCustomizer(SdkTracerProviderBuilder sdkTracerProviderBuilder, ConfigProperties configProperties) {
+        sdkTracerProviderBuilder.setIdGenerator(TraceIdGenerator.INSTANCE);
+        return sdkTracerProviderBuilder;
+    }
 
     @Bean
     @ConditionalOnMissingBean

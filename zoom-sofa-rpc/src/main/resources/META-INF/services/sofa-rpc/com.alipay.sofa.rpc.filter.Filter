@@ -1,2 +1,3 @@
 serverExceptionLogPrintFilter=com.hb0730.zoom.sofa.rpc.core.filter.ServerExceptionLogPrintFilter
 usernameFilter=com.hb0730.zoom.sofa.rpc.core.filter.UsernameFilter
+traceFilter=com.hb0730.zoom.sofa.rpc.core.filter.TraceFilter
