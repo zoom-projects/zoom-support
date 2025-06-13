@@ -5,19 +5,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.hb0730.zoom.base.meta.ICurrentUserService;
+import com.hb0730.zoom.base.utils.StrUtil;
 import com.hb0730.zoom.desensitize.core.modifier.DesensitizeSerializerModifier;
 import com.hb0730.zoom.desensitize.core.serializer.MapDesensitizeSerializer;
 import com.hb0730.zoom.operator.log.configuration.config.OperatorLogConfig;
 import com.hb0730.zoom.operator.log.core.aspect.OperatorLogAspect;
+import com.hb0730.zoom.operator.log.core.factory.OperatorTypeBeanRegistryPostProcessor;
 import com.hb0730.zoom.operator.log.core.model.OperatorLogModelBuilder;
 import com.hb0730.zoom.operator.log.core.service.OperatorLogFrameworkService;
 import com.hb0730.zoom.operator.log.core.service.OperatorLogFrameworkServiceDelegate;
 import com.hb0730.zoom.operator.log.core.util.OperatorLogs;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
@@ -76,4 +82,23 @@ public class OperatorLogConfiguration {
         OperatorLogModelBuilder.setOperatorLogConfig(operatorLogConfig);
         return new OperatorLogAspect(service, currentUserService);
     }
+
+    /**
+     * 操作日志类型注册器,支持自动扫描指定包下的操作日志类型
+     *
+     * @param environment 环境变量
+     * @return OperatorTypeBeanRegistryPostProcessor
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public OperatorTypeBeanRegistryPostProcessor operatorLogConfig(Environment environment) {
+        String scanPackage = environment.getProperty("zoom.operator.log.scanPackage");
+        if (StrUtil.isBlank(scanPackage)) {
+            scanPackage = environment.getProperty("zoom.operator.log.scan-package", "com.hb0730.zoom");
+        }
+        List<String> scanPackageList = StrUtil.split(scanPackage, ",");
+        return new OperatorTypeBeanRegistryPostProcessor(scanPackageList);
+    }
+
+
 }

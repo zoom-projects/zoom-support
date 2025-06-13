@@ -37,6 +37,13 @@ public class OperatorLogConfig {
      */
     private List<String> desensitize = new ArrayList<>();
 
+    /**
+     * 扫描包路径
+     * <p>
+     * 默认 com.hb0730.zoom
+     */
+    private String scanPackage = "com.hb0730.zoom";
+
     public OperatorLogConfig() {
         this.errorMessageLength = 255;
         this.userAgentLength = 128;
