@@ -1,12 +1,12 @@
 package com.hb0730.zoom.operator.log.core.factory;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.type.filter.AssignableTypeFilter;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Objects;
  * @author <a href="mailto:huangbing0730@gmail">hb0730</a>
  * @date 2024/12/22
  */
-@Configuration
+@Slf4j
 public class OperatorTypeBeanRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
     private static final String DEFAULT_SCAN_PACKAGE = "com.hb0730.zoom";
     private final List<String> scanPackages;
